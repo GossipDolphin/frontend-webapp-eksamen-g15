@@ -23,7 +23,11 @@ const Offices = () => {
 
     const generateOffices = () => {
         for (let i = 0; i < generatedOfficeList.length; i++) {
-            for (let j = 0; j < 6; j++) {
+            let length = 5
+            if (i === 0 || i === 2) {
+                length = 8;
+            }
+            for (let j = 0; j < length; j++) {
                 generatedOfficeList[i].offices.push(new Office(generatedOfficeList[i].location, i + "" + j, "69 99 00 00", generatedOfficeList[i].location + i + "" + j + "@epost.no"));
             }
         }

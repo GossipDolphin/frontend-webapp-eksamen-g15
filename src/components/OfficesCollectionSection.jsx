@@ -5,7 +5,7 @@ import OfficeCard from "../components/OfficeCard";
 export const OfficesCollectionSection = ({ location, offices }) => {
     return (
         <>
-            <h1>{location}</h1>
+            <h2>{location} ({offices.length} kontorer)</h2>
             <OfficesCollectionGridStyled>
                 {offices.map(office => {
                     return (

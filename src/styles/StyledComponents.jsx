@@ -165,6 +165,10 @@ export const FooterStyled = styled.footer`
 export const OfficesSection = styled.section`
     display: flex;
     flex-direction: column;
+    h2{
+        margin: 20px;
+        font-weight: bold;
+    }
 `;
 
 export const BannerStyled = styled.section`
@@ -188,6 +192,12 @@ export const OfficesCollectionGridStyled = styled.section`
 `;
 
 export const OfficeCardStyled = styled.article`
-    border: 2px solid black;
+    border: 2px solid grey;
     margin: 10px;
+    >*{
+        margin: 15px;
+    }
+    >:first-child{
+        font-weight: bold;
+    }
 `;
