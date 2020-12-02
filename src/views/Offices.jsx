@@ -28,13 +28,15 @@ const Offices = () => {
     ];
 
     const generateOffices = () => {
+        let nummer = 0;
         for (let i = 0; i < generatedOfficeList.length; i++) {
             let length = 5
             if (i === 0 || i === 2) {
                 length = 8;
             }
             for (let j = 0; j < length; j++) {
-                generatedOfficeList[i].offices.push(new Office(generatedOfficeList[i].location, i + "" + j, "69 99 00 00", generatedOfficeList[i].location + i + "" + j + "@epost.no"));
+                generatedOfficeList[i].offices.push(new Office(generatedOfficeList[i].location, nummer, "69 99 00 00", generatedOfficeList[i].location + nummer + "@epost.no"));
+                nummer++;
             }
         }
         return generatedOfficeList;
@@ -47,7 +49,7 @@ const Offices = () => {
         <OfficesSection>{detailedOffice === null ?
             <>
                 <Banner bannerTitle="Våre kontorer"></Banner>
-                <OfficesUiButtons setShowListUi={setShowListUi} setFilterValue={setFilterValue} ></OfficesUiButtons>
+                <OfficesUiButtons setShowListUi={setShowListUi} setFilterValue={setFilterValue} filterValue={filterValue}></OfficesUiButtons>
                 {filterValue.length > 1 ? officeList.filter(office => office.location === filterValue).map(office => {
                     return (
                         <OfficesCollectionSection
@@ -70,7 +72,7 @@ const Offices = () => {
             </> :
             <>
             <Banner bannerTitle={"Kontor Rørlegger " + detailedOffice.nummer}></Banner>
-            <DetailedOffice detailedOffice={detailedOffice}></DetailedOffice>
+            <DetailedOffice detailedOffice={detailedOffice} setDetailedOffice={setDetailedOffice}></DetailedOffice>
             </>}
             <Footer orgnr="007 007 007" email="lg@lgror.no" tlf="99 00 00 00"></Footer>
         </OfficesSection>

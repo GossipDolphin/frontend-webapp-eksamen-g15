@@ -1,8 +1,12 @@
 import React from 'react';
+import { ArticlesSection } from "../styles/StyledComponents";
+import Banner from "../components/Banner";
 
 const Articles = () => {
-    return(
-        <p>Articles</p>
+    return (
+        <ArticlesSection>
+            <Banner bannerTitle="Fagartikler"></Banner>
+        </ArticlesSection>
     )
 }
 

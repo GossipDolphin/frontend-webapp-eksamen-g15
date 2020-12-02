@@ -1,7 +1,7 @@
 import React from 'react';
 import { OfficesButtonUiSection } from "../styles/StyledComponents"
 
-const OfficesUiButtons = ({ setShowListUi, setFilterValue }) => {
+const OfficesUiButtons = ({ setShowListUi, setFilterValue, filterValue }) => {
 
     const changeToCardView = () => {
         setShowListUi(false);
@@ -28,7 +28,7 @@ const OfficesUiButtons = ({ setShowListUi, setFilterValue }) => {
                 <div></div>
                 <div></div>
             </button>
-            <select onChange={toggleFilterByLocation}>
+            <select value={filterValue} onChange={toggleFilterByLocation}>
                 <option value="0">Ingen filter</option>
                 <option value="Fredrikstad">Fredrikstad</option>
                 <option value="Sarpsborg">Sarpsborg</option>

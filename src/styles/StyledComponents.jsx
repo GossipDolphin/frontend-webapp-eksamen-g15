@@ -3,7 +3,8 @@ import styled from 'styled-components';
 export const NavBarStyled = styled.nav`
     display: flex;
     background-color: white;
-    box-shadow: 0px 6px 6px grey;
+    box-shadow: 0px 3px 10px grey;
+    margin-bottom: 3px;
 
     ul{
         display: flex;
@@ -102,6 +103,8 @@ export const ArticlesSectionStyled = styled.section`
     }
     >*:hover{
         cursor: pointer;
+        background-color: #43b8d9;
+        color: white;
     }
     >*>*{
         margin: 0 auto;
@@ -117,6 +120,8 @@ export const ArticlesSectionStyled = styled.section`
         grid-row-end: 2;
         :hover{
             cursor: auto;
+            background-color: lightgray;
+            color: black;
         }
     };
     >:nth-child(2){
@@ -200,6 +205,10 @@ export const OfficeCardStyled = styled.article`
     >:first-child{
         font-weight: bold;
     }
+    :hover{
+        cursor: pointer;
+        background-color: lightgray;
+    }
 `;
 
 export const OfficesButtonUiSection = styled.section`
@@ -229,6 +238,12 @@ export const OfficesButtonUiSection = styled.section`
                 background-color: #43b8d9;
             }
         }
+        :hover{
+            >*{
+                background-color: #43b8d9;
+            }
+            cursor: pointer;
+        }
     }
     >:nth-child(2){
         display: grid;
@@ -249,12 +264,22 @@ export const OfficesButtonUiSection = styled.section`
                 background-color: #43b8d9;
             }
         }
+        :hover{
+            >*{
+                background-color: #43b8d9;
+            }
+            cursor: pointer;
+        }
     }
     >:last-child{
         width: 120px;
         border-style: none;
         background-color: lightgray;
+        color: black;
         font-weight: bold;
+        :hover{
+            cursor: pointer;
+        }
     }
 `;
 
@@ -268,6 +293,10 @@ export const OfficeListElementStyled = styled.article`
     display: flex;
     flex-direction: row;
     margin-left: 10px;
+    :hover{
+        cursor: pointer;
+        background-color: lightgray;
+    }
     >*{
         margin: 10px;
     }
@@ -288,11 +317,29 @@ export const WelcomeArticleStyled = styled.article`
         margin: 25px;
         margin-top: 0;
     }
+    >button{
+        width: 100px;
+        height: 30px;
+        margin-left: 20px;
+        margin-top: 10px;
+        border: none;
+        color: white;
+        background-color: #43b8d9;
+    }
+    >button:hover{
+        background-color: gray;
+        cursor: pointer;
+    }
 `;
 
 export const DetailedOfficeSection = styled.section`
     display: flex;
     flex-direction: column;
+    width: 90vw;
+    margin: 0 auto;
+    >:last-child{
+        margin-bottom: 40px;
+    }
 `;
 
 export const EmployeeGridSection = styled.section`
@@ -321,3 +368,7 @@ export const EmployeeCardStyledArticle = styled.article`
     }
 `;
 
+export const ArticlesSection = styled.section`
+    display: flex;
+    flex-direction: column;
+`;
