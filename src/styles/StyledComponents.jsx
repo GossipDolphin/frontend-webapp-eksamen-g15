@@ -371,4 +371,35 @@ export const EmployeeCardStyledArticle = styled.article`
 export const ArticlesSection = styled.section`
     display: flex;
     flex-direction: column;
+    margin: 0 auto;
+    width: 60vw;
+`;
+
+export const ArticleButtonsUiSection = styled.section`
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+    font-weight: bold;
+    font-size: 13px;
+    >:first-child{
+        margin-right: auto;
+        margin-left: 0;
+        background-color: #43b8d9;
+        color: white;
+    }
+    >*{
+        margin-left: 10px;
+    }
+`;
+
+export const StandardButton = styled.section`
+    width: 140px;
+    height: 60px;
+    background-color: lightgray;
+    border: none;
+    padding: 0;
+    display: inline-block;
+    line-height: 58px;
+    text-align: center;
+    margin-top: 10px;
 `;
