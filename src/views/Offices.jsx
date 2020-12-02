@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
-import { OfficesSection } from '../styles/StyledComponents'
+import React, { useState, useEffect } from 'react';
+import { OfficesSection } from '../styles/StyledComponents';
 import Banner from "../components/Banner";
-import OfficesCollectionSection from "../components/OfficesCollectionSection"
+import OfficesCollectionSection from "../components/OfficesCollectionSection";
+import OfficesUiButtons from "../components/OfficesUiButtons";
+import DetailedOffice from "../components/DetailedOffice";
+import Footer from "../components/Footer"
 
 const Offices = () => {
+    const [officeList, setOfficeList] = useState([]);
+    const [showListUi, setShowListUi] = useState(false);
+    const [filterValue, setFilterValue] = useState("");
+    const [detailedOffice, setDetailedOffice] = useState(null);
 
     class Office {
         constructor(city, nummer, tlf, epost,) {
@@ -13,7 +20,6 @@ const Offices = () => {
             this.epost = epost;
         }
     }
-    const [officeList, setOfficeList] = useState([]);
     const generatedOfficeList = [
         { "location": "Fredrikstad", "offices": [] },
         { "location": "Sarpsborg", "offices": [] },
@@ -33,16 +39,40 @@ const Offices = () => {
         }
         return generatedOfficeList;
     }
+    useEffect(() => {
+        setOfficeList(generateOffices)
+    }, [])
 
     return (
-
-        <OfficesSection>
-            <Banner bannerTitle="Våre kontorer"></Banner>
-            {generateOffices().map(office => {
-                return (
-                    <OfficesCollectionSection location={office.location} offices={office.offices}></OfficesCollectionSection>
-                )
-            })}
+        <OfficesSection>{detailedOffice === null ?
+            <>
+                <Banner bannerTitle="Våre kontorer"></Banner>
+                <OfficesUiButtons setShowListUi={setShowListUi} setFilterValue={setFilterValue} ></OfficesUiButtons>
+                {filterValue.length > 1 ? officeList.filter(office => office.location === filterValue).map(office => {
+                    return (
+                        <OfficesCollectionSection
+                            location={office.location}
+                            offices={office.offices}
+                            showListUi={showListUi}
+                            setDetailedOffice={setDetailedOffice}>
+                        </OfficesCollectionSection>
+                    )
+                }) : officeList.map(office => {
+                    return (
+                        <OfficesCollectionSection
+                            location={office.location}
+                            offices={office.offices}
+                            showListUi={showListUi}
+                            setDetailedOffice={setDetailedOffice}></OfficesCollectionSection>
+                    )
+                })
+                }
+            </> :
+            <>
+            <Banner bannerTitle={"Kontor Rørlegger " + detailedOffice.nummer}></Banner>
+            <DetailedOffice detailedOffice={detailedOffice}></DetailedOffice>
+            </>}
+            <Footer orgnr="007 007 007" email="lg@lgror.no" tlf="99 00 00 00"></Footer>
         </OfficesSection>
     )
 }

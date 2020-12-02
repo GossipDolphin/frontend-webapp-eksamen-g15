@@ -175,7 +175,7 @@ export const BannerStyled = styled.section`
     margin: 0;
     height: 310px;
     background-color: lightgray;
-    width: 100vw;
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -201,3 +201,123 @@ export const OfficeCardStyled = styled.article`
         font-weight: bold;
     }
 `;
+
+export const OfficesButtonUiSection = styled.section`
+    >*{
+        outline: none;
+        float: right;
+        margin-right: 10px;
+        margin-top: 10px;
+        height: 43px;
+        border-style: none;
+        width: 43px;
+        background-color: whitesmoke;
+    }
+    >:nth-child(1){
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        >*{
+            background-color: black;
+            margin: 0 auto;
+            width: 13px;
+            height: 13px;
+            margin-top: 2.5px;
+        }
+        :focus{
+            >*{
+                background-color: #43b8d9;
+            }
+        }
+    }
+    >:nth-child(2){
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        >*{
+            background-color: black;
+            margin: 0 auto;
+            width: 30px;
+            height: 5px;
+        }
+        >:first-child{
+            margin-top: 5px;
+            margin-bottom: 7px;
+        }
+        :focus{
+            >*{
+                background-color: #43b8d9;
+            }
+        }
+    }
+    >:last-child{
+        width: 120px;
+        border-style: none;
+        background-color: lightgray;
+        font-weight: bold;
+    }
+`;
+
+
+export const OfficesCollectionListStyled = styled.section`
+    display: flex;
+    flex-direction: column;
+`;
+
+export const OfficeListElementStyled = styled.article`
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+    >*{
+        margin: 10px;
+    }
+    >:first-child{
+        background-color: black;
+        color: white;
+        padding: 3px;
+    }
+`;
+
+export const WelcomeArticleStyled = styled.article`
+    display: flex;
+    flex-direction: column;
+    >h2{
+        font-size: 30px;
+    }
+    >p{
+        margin: 25px;
+        margin-top: 0;
+    }
+`;
+
+export const DetailedOfficeSection = styled.section`
+    display: flex;
+    flex-direction: column;
+`;
+
+export const EmployeeGridSection = styled.section`
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20ch, 1fr));
+    margin: 20px;
+`;
+
+export const EmployeeCardStyledArticle = styled.article`
+    display: flex;
+    flex-direction: column;
+    width: 130px;
+    height: 180px;
+    margin: 5px;
+    >section{
+        width: 120px;
+        height: 100px;
+        background-color: lightgray;
+    }
+    >p{
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    >:nth-child(2){
+        margin-top: 5px;
+    }
+`;
+
