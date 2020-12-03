@@ -381,6 +381,7 @@ export const ArticleButtonsUiSection = styled.section`
     margin-top: 50px;
     font-weight: bold;
     font-size: 13px;
+    margin-bottom: 40px;
     >:first-child{
         margin-right: auto;
         margin-left: 0;
@@ -392,7 +393,7 @@ export const ArticleButtonsUiSection = styled.section`
     }
 `;
 
-export const StandardButton = styled.section`
+export const StandardButton = styled.button`
     width: 140px;
     height: 60px;
     background-color: lightgray;
@@ -402,4 +403,75 @@ export const StandardButton = styled.section`
     line-height: 58px;
     text-align: center;
     margin-top: 10px;
+`;
+
+export const ArticleCardWrapperGrid = styled.article`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 240px;
+    margin: 0 auto;
+
+    >:nth-child(1){
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 1;
+        grid-row-end: 4;
+        height: 180px;
+        width: 220px;
+        margin: auto 0;
+        background-color: lightgray;
+        margin-bottom: 30px;
+
+    }>:nth-child(2){
+        grid-column-start: 2;
+        grid-column-end: 5;
+        grid-row-start: 1;
+        grid-row-end: 2;
+        margin: auto 0;
+        margin-bottom: 0;
+        margin-left: 30px;
+        font-size: 40px;
+        font-weight: bold;
+
+        
+    }>:nth-child(3){
+        grid-column-start: 5;
+        grid-column-end: 6;
+        grid-row-start: 1;
+        grid-row-end: 2;
+        margin: auto 0;
+        margin-bottom: 0;
+        font-weight: bold;
+        text-align: right;
+
+    }>:nth-child(4){
+        grid-column-start: 2;
+        grid-column-end: 6;
+        grid-row-start: 2;
+        grid-row-end: 4;
+        margin: auto 0;
+        margin-left: 30px;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+`;
+
+export const PageNumberButtonsSection = styled.section`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+    >*{
+        margin-left: 5px;
+        border: none;
+        background-color: darkgray;
+        color: white;
+        width: 20px;
+        height: 20px;
+    }
+    >*:focus{
+        background-color: black;
+        border: none;
+    }
 `;
