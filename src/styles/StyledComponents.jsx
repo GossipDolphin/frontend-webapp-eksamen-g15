@@ -304,6 +304,8 @@ export const OfficeListElementStyled = styled.article`
         background-color: black;
         color: white;
         padding: 3px;
+        width: 16px;
+        text-align: center;
     }
 `;
 
@@ -411,7 +413,14 @@ export const ArticleCardWrapperGrid = styled.article`
     grid-template-rows: 1fr 1fr 1fr;
     height: 240px;
     margin: 0 auto;
-
+    padding-right: 10px;
+    padding-left: 10px;
+    :hover{
+        cursor: pointer;
+        background-color: darkgray;
+        color: black;
+        border-radius: 5px;
+    }
     >:nth-child(1){
         grid-column-start: 1;
         grid-column-end: 2;
@@ -462,6 +471,7 @@ export const PageNumberButtonsSection = styled.section`
     flex-direction: row;
     justify-content: flex-end;
     margin-bottom: 10px;
+    margin-top: 10px;
     >*{
         margin-left: 5px;
         border: none;
@@ -469,9 +479,69 @@ export const PageNumberButtonsSection = styled.section`
         color: white;
         width: 20px;
         height: 20px;
+        :hover{
+            cursor: pointer;
+        }
     }
-    >*:focus{
-        background-color: black;
+`;
+
+export const DetailedArticleSection = styled.section`
+    display: flex;
+    flex-direction: column;
+    width: 60vw;
+    margin: 0 auto;
+    >:first-child{
+        width: 100px;
+        height: 30px;
+        margin-left: 0;
+        margin-top: 10px;
         border: none;
+        color: white;
+        background-color: #43b8d9;
+        :hover{
+            background-color: gray;
+            cursor: pointer;
+        }
+    }
+
+    >:nth-child(2){
+        display: flex;
+        >:last-child{
+            margin-left: auto;
+        }
+        >*{
+            font-weight: bold;
+            font-size: 13px;
+        }
+    }
+    >:nth-child(3){
+        margin-top: 0;
+    }
+    >:nth-child(8){
+        font-weight: bold;
+        font-size: 13px;
+    }
+    h2{
+        margin-bottom: 0;
+        font-weight: bold;
+    }
+    
+`;
+
+export const DetailedArticleButtonSection = styled.section`
+    display: flex;
+    flex-direction: row;
+    >:first-child{
+        margin-right: 10px;
+        background-color: #d14040;
+        color: white;
+    }
+    >:last-child{
+        background-color: #adad44;
+        color: white;
+    }
+    >*{
+        margin-bottom: 40px;
+        margin-top: 40px;
     }
 `;
