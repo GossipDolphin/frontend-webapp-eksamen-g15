@@ -5,6 +5,7 @@ import ArticlesUiButtons from "../components/ArticlesUiButtons"
 import ArticleCard from "../components/ArticleCard";
 import Footer from "../components/Footer";
 import DetailedArticle from "../components/DetailedArticle"
+import CreateArticleForm from "../components/CreateArticleForm"
 
 const Articles = () => {
 
@@ -13,6 +14,11 @@ const Articles = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageNumbers, setPageNumbers] = useState([]);
     const [detailedArticle, setDetailedArticle] = useState(null);
+    const [filterValue, setFilterValue] = useState("")
+    const [categoryList, setCategoryList] = useState([]);
+    const [filteredArticles, setFilteredArticles] = useState([]);
+    const [showArticleForm, setShowArticleForm] = useState(false);
+
     class Article {
         constructor(title, summary, subTitleOne, contentOne, subTitleTwo, contentTwo, dateCreated, author, category) {
             this.title = title;
@@ -34,20 +40,37 @@ const Articles = () => {
     //remove after api is up ---- change it to api call to get articles ----
     const generateArticles = () => {
         const generatedArticles = [];
-        for (let i = 0; i < 12; i++) {
-            generatedArticles.push(
-                new Article(
-                    "title" + i,
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc volutpat dapibus tellus non imperdiet. Nam nisl dolor, vehicula eu faucibus id, auctor et dui. Vestibulum aliquet lobortis odio. Aenean cursus tortor nibh, quis imperdiet lectus pretium at. Nulla cursus justo at aliquam commodo. Integer nec pharetra nisi. Vivamus nisi enim, pellentesque ut auctor consectetur, auctor eu tellus. Donec finibus libero enim, quis auctor nibh consectetur eu. Quisque lobortis dapibus vehicula. Morbi vitae volutpat neque. Pellentesque enim ante, auctor sit amet tortor vel, euismod volutpat nunc. Morbi quis placerat lorem. Nulla tincidunt in magna at pretium. Vivamus pulvinar lectus turpis, at.",
-                    "sub title 1",
-                    "content 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis blandit urna et consequat. Aliquam erat volutpat. Nam dui erat, tincidunt in finibus ut, tempor in odio. Nunc egestas ex sed vulputate porta. Maecenas pretium nisi id libero pulvinar, vitae sollicitudin justo euismod. In tristique purus ut suscipit mattis. Sed at lectus feugiat, blandit turpis ut, convallis lectus. Curabitur consectetur orci id justo porta, at aliquet libero semper. Donec ultrices facilisis malesuada. In at felis orci. Suspendisse quis eros in dolor rutrum mattis a eu dui. Cras interdum semper nisl et eleifend. Cras pulvinar odio nunc, ac fringilla ex malesuada non. Curabitur et elit et justo dignissim porta. Aenean massa est, facilisis et erat sit amet, aliquet maximus velit. Mauris erat lacus, pharetra in vulputate et, tempor sed velit. Donec id lectus vel odio lobortis consectetur. Phasellus mollis orci felis, quis cursus magna consectetur sed. Integer gravida ultricies ultricies. Donec convallis nibh at molestie interdum. Morbi hendrerit, purus eget porta dictum, turpis risus maximus leo, ac molestie sem lorem a felis. Proin pretium ornare orci a gravida. Nullam eu dignissim nisi. Sed porta, dui vitae commodo posuere, neque urna feugiat arcu, nec mattis orci velit vitae diam. Nulla malesuada consectetur.",
-                    "subtitle 2",
-                    "content 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis blandit urna et consequat. Aliquam erat volutpat. Nam dui erat, tincidunt in finibus ut, tempor in odio. Nunc egestas ex sed vulputate porta. Maecenas pretium nisi id libero pulvinar, vitae sollicitudin justo euismod. In tristique purus ut suscipit mattis. Sed at lectus feugiat, blandit turpis ut, convallis lectus. Curabitur consectetur orci id justo porta, at aliquet libero semper. Donec ultrices facilisis malesuada. In at felis orci. Suspendisse quis eros in dolor rutrum mattis a eu dui. Cras interdum semper nisl et eleifend. Cras pulvinar odio nunc, ac fringilla ex malesuada non. Curabitur et elit et justo dignissim porta. Aenean massa est, facilisis et erat sit amet, aliquet maximus velit. Mauris erat lacus, pharetra in vulputate et, tempor sed velit. Donec id lectus vel odio lobortis consectetur. Phasellus mollis orci felis, quis cursus magna consectetur sed. Integer gravida ultricies ultricies. Donec convallis nibh at molestie interdum. Morbi hendrerit, purus eget porta dictum, turpis risus maximus leo, ac molestie sem lorem a felis. Proin pretium ornare orci a gravida. Nullam eu dignissim nisi. Sed porta, dui vitae commodo posuere, neque urna feugiat arcu, nec mattis orci velit vitae diam. Nulla malesuada consectetur.",
-                    new Date(Date.now()).toLocaleDateString("no-NO"),
-                    "author" + i,
-                    "Avløpsrens"
+        for (let i = 1; i < 13; i++) {
+            if (i % 2 === 0) {
+                generatedArticles.push(
+                    new Article(
+                        "title" + i,
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc volutpat dapibus tellus non imperdiet. Nam nisl dolor, vehicula eu faucibus id, auctor et dui. Vestibulum aliquet lobortis odio. Aenean cursus tortor nibh, quis imperdiet lectus pretium at. Nulla cursus justo at aliquam commodo. Integer nec pharetra nisi. Vivamus nisi enim, pellentesque ut auctor consectetur, auctor eu tellus. Donec finibus libero enim, quis auctor nibh consectetur eu. Quisque lobortis dapibus vehicula. Morbi vitae volutpat neque. Pellentesque enim ante, auctor sit amet tortor vel, euismod volutpat nunc. Morbi quis placerat lorem. Nulla tincidunt in magna at pretium. Vivamus pulvinar lectus turpis, at.",
+                        "sub title 1",
+                        "content 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis blandit urna et consequat. Aliquam erat volutpat. Nam dui erat, tincidunt in finibus ut, tempor in odio. Nunc egestas ex sed vulputate porta. Maecenas pretium nisi id libero pulvinar, vitae sollicitudin justo euismod. In tristique purus ut suscipit mattis. Sed at lectus feugiat, blandit turpis ut, convallis lectus. Curabitur consectetur orci id justo porta, at aliquet libero semper. Donec ultrices facilisis malesuada. In at felis orci. Suspendisse quis eros in dolor rutrum mattis a eu dui. Cras interdum semper nisl et eleifend. Cras pulvinar odio nunc, ac fringilla ex malesuada non. Curabitur et elit et justo dignissim porta. Aenean massa est, facilisis et erat sit amet, aliquet maximus velit. Mauris erat lacus, pharetra in vulputate et, tempor sed velit. Donec id lectus vel odio lobortis consectetur. Phasellus mollis orci felis, quis cursus magna consectetur sed. Integer gravida ultricies ultricies. Donec convallis nibh at molestie interdum. Morbi hendrerit, purus eget porta dictum, turpis risus maximus leo, ac molestie sem lorem a felis. Proin pretium ornare orci a gravida. Nullam eu dignissim nisi. Sed porta, dui vitae commodo posuere, neque urna feugiat arcu, nec mattis orci velit vitae diam. Nulla malesuada consectetur.",
+                        "subtitle 2",
+                        "content 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis blandit urna et consequat. Aliquam erat volutpat. Nam dui erat, tincidunt in finibus ut, tempor in odio. Nunc egestas ex sed vulputate porta. Maecenas pretium nisi id libero pulvinar, vitae sollicitudin justo euismod. In tristique purus ut suscipit mattis. Sed at lectus feugiat, blandit turpis ut, convallis lectus. Curabitur consectetur orci id justo porta, at aliquet libero semper. Donec ultrices facilisis malesuada. In at felis orci. Suspendisse quis eros in dolor rutrum mattis a eu dui. Cras interdum semper nisl et eleifend. Cras pulvinar odio nunc, ac fringilla ex malesuada non. Curabitur et elit et justo dignissim porta. Aenean massa est, facilisis et erat sit amet, aliquet maximus velit. Mauris erat lacus, pharetra in vulputate et, tempor sed velit. Donec id lectus vel odio lobortis consectetur. Phasellus mollis orci felis, quis cursus magna consectetur sed. Integer gravida ultricies ultricies. Donec convallis nibh at molestie interdum. Morbi hendrerit, purus eget porta dictum, turpis risus maximus leo, ac molestie sem lorem a felis. Proin pretium ornare orci a gravida. Nullam eu dignissim nisi. Sed porta, dui vitae commodo posuere, neque urna feugiat arcu, nec mattis orci velit vitae diam. Nulla malesuada consectetur.",
+                        new Date(Date.now()).toLocaleDateString("no-NO"),
+                        "author" + i,
+                        "Avløpsrens"
+                    )
                 )
-            )
+            }
+            else {
+                generatedArticles.push(
+                    new Article(
+                        "title" + i,
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc volutpat dapibus tellus non imperdiet. Nam nisl dolor, vehicula eu faucibus id, auctor et dui. Vestibulum aliquet lobortis odio. Aenean cursus tortor nibh, quis imperdiet lectus pretium at. Nulla cursus justo at aliquam commodo. Integer nec pharetra nisi. Vivamus nisi enim, pellentesque ut auctor consectetur, auctor eu tellus. Donec finibus libero enim, quis auctor nibh consectetur eu. Quisque lobortis dapibus vehicula. Morbi vitae volutpat neque. Pellentesque enim ante, auctor sit amet tortor vel, euismod volutpat nunc. Morbi quis placerat lorem. Nulla tincidunt in magna at pretium. Vivamus pulvinar lectus turpis, at.",
+                        "sub title 1",
+                        "content 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis blandit urna et consequat. Aliquam erat volutpat. Nam dui erat, tincidunt in finibus ut, tempor in odio. Nunc egestas ex sed vulputate porta. Maecenas pretium nisi id libero pulvinar, vitae sollicitudin justo euismod. In tristique purus ut suscipit mattis. Sed at lectus feugiat, blandit turpis ut, convallis lectus. Curabitur consectetur orci id justo porta, at aliquet libero semper. Donec ultrices facilisis malesuada. In at felis orci. Suspendisse quis eros in dolor rutrum mattis a eu dui. Cras interdum semper nisl et eleifend. Cras pulvinar odio nunc, ac fringilla ex malesuada non. Curabitur et elit et justo dignissim porta. Aenean massa est, facilisis et erat sit amet, aliquet maximus velit. Mauris erat lacus, pharetra in vulputate et, tempor sed velit. Donec id lectus vel odio lobortis consectetur. Phasellus mollis orci felis, quis cursus magna consectetur sed. Integer gravida ultricies ultricies. Donec convallis nibh at molestie interdum. Morbi hendrerit, purus eget porta dictum, turpis risus maximus leo, ac molestie sem lorem a felis. Proin pretium ornare orci a gravida. Nullam eu dignissim nisi. Sed porta, dui vitae commodo posuere, neque urna feugiat arcu, nec mattis orci velit vitae diam. Nulla malesuada consectetur.",
+                        "subtitle 2",
+                        "content 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras convallis blandit urna et consequat. Aliquam erat volutpat. Nam dui erat, tincidunt in finibus ut, tempor in odio. Nunc egestas ex sed vulputate porta. Maecenas pretium nisi id libero pulvinar, vitae sollicitudin justo euismod. In tristique purus ut suscipit mattis. Sed at lectus feugiat, blandit turpis ut, convallis lectus. Curabitur consectetur orci id justo porta, at aliquet libero semper. Donec ultrices facilisis malesuada. In at felis orci. Suspendisse quis eros in dolor rutrum mattis a eu dui. Cras interdum semper nisl et eleifend. Cras pulvinar odio nunc, ac fringilla ex malesuada non. Curabitur et elit et justo dignissim porta. Aenean massa est, facilisis et erat sit amet, aliquet maximus velit. Mauris erat lacus, pharetra in vulputate et, tempor sed velit. Donec id lectus vel odio lobortis consectetur. Phasellus mollis orci felis, quis cursus magna consectetur sed. Integer gravida ultricies ultricies. Donec convallis nibh at molestie interdum. Morbi hendrerit, purus eget porta dictum, turpis risus maximus leo, ac molestie sem lorem a felis. Proin pretium ornare orci a gravida. Nullam eu dignissim nisi. Sed porta, dui vitae commodo posuere, neque urna feugiat arcu, nec mattis orci velit vitae diam. Nulla malesuada consectetur.",
+                        new Date(Date.now()).toLocaleDateString("no-NO"),
+                        "author" + i,
+                        "Vask Montering"
+                    )
+                )
+            }
         }
         return generatedArticles;
     }
@@ -60,55 +83,92 @@ const Articles = () => {
         return pageNumbersGenerated;
     }
 
+    //change it to return categories from api call
+    const getCategoryes = () => {
+        categoryList.push("Avløpsrens");
+        categoryList.push("Vask Montering");
+        return categoryList;
+    }
+
     useEffect(() => {
         setArticlesList(generateArticles)
-        setPageNumbers(generatePageNumbers)
+        if (categoryList.length < 1) {
+            setCategoryList(getCategoryes)
+        }
+    }, [])
+
+    useEffect(() => {
+        if (pageNumbers.length < 1) {
+            setPageNumbers(generatePageNumbers)
+        }
         if (detailedArticle === null) {
             setColorOnSelectedPageNumber();
         }
     })
 
-    const setColorOnSelectedPageNumber = () => {
-        pageNumbers.forEach(id => {
-            document.getElementById(id).style.backgroundColor = "gray";
-            if (id === currentPage) {
-                document.getElementById(id).style.backgroundColor = "black";
-            }
-        });
-    }
+    useEffect(() => {
+        setFilteredArticles(articlesList.filter(article => article.category === filterValue))
+        if (filterValue.length > 1) {
+            setPageNumbers([1])
+        }
+        else {
+            setPageNumbers(generatePageNumbers)
+        }
+    }, [filterValue])
 
     const indexOfLastArticle = currentPage * articlesPerPage;
     const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
     const currentArticles = articlesList.slice(indexOfFirstArticle, indexOfLastArticle);
 
+    const setColorOnSelectedPageNumber = () => {
+        pageNumbers.forEach(id => {
+            if (document.getElementById(id) !== null) {
+                document.getElementById(id).style.backgroundColor = "gray";
+                if (id === currentPage) {
+                    document.getElementById(id).style.backgroundColor = "black";
+                }
+            }
+        });
+    }
+
     return (
-        <>{detailedArticle === null ?
-            <>
-                <Banner bannerTitle="Fagartikler"></Banner>
-                <ArticlesSection>
-                    <ArticlesUiButtons></ArticlesUiButtons>
-                    {currentArticles.map((article) => {
-                        return (
-                            <ArticleCard article={article} setDetailedArticle={setDetailedArticle}></ArticleCard>
-                        )
-                    })}
-                    <PageNumberButtonsSection>
-                        {pageNumbers.map(number => {
+        <>{showArticleForm ? <>
+            <Banner bannerTitle="Ny artikkel"></Banner>
+            <CreateArticleForm></CreateArticleForm>
+        </> :
+            <>{detailedArticle === null ?
+                <>
+                    <Banner bannerTitle="Fagartikler"></Banner>
+                    <ArticlesSection>
+                        <ArticlesUiButtons filterValue={filterValue} setFilterValue={setFilterValue} categoryList={categoryList} setShowArticleForm={setShowArticleForm}></ArticlesUiButtons>
+                        {filterValue.length > 1 ? filteredArticles.map((article, index) => {
                             return (
-                                <button
-                                    key={number}
-                                    id={number}
-                                    onClick={changePage}>{number}</button>
+                                <ArticleCard key={index} article={article} setDetailedArticle={setDetailedArticle}></ArticleCard>
+                            )
+                        }) : currentArticles.map((article, index) => {
+                            return (
+                                <ArticleCard key={index} article={article} setDetailedArticle={setDetailedArticle}></ArticleCard>
                             )
                         })}
-                    </PageNumberButtonsSection>
-                </ArticlesSection>
+                        <PageNumberButtonsSection>
+                            {pageNumbers.map(number => {
+                                return (
+                                    <button
+                                        key={number}
+                                        id={number}
+                                        onClick={changePage}>{number}</button>
+                                )
+                            })}
+                        </PageNumberButtonsSection>
+                    </ArticlesSection>
+                </>
+                : <>
+                    <Banner bannerTitle={detailedArticle.title}></Banner>
+                    <DetailedArticle detailedArticle={detailedArticle} setDetailedArticle={setDetailedArticle}></DetailedArticle>
+                </>}
+                <Footer orgnr="007 007 007" email="lg@lgror.no" tlf="99 00 00 00"></Footer>
             </>
-            : <>
-                <Banner bannerTitle={detailedArticle.title}></Banner>
-                <DetailedArticle detailedArticle={detailedArticle} setDetailedArticle={setDetailedArticle}></DetailedArticle>
-            </>}
-            <Footer orgnr="007 007 007" email="lg@lgror.no" tlf="99 00 00 00"></Footer>
+        }
         </>
     )
 }

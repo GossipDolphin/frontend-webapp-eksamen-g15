@@ -393,6 +393,20 @@ export const ArticleButtonsUiSection = styled.section`
     >*{
         margin-left: 10px;
     }
+    >textArea{
+        height: 30px;
+        margin-top: 22px;
+        font-size: 18px;
+        resize: none;
+        border: solid 2px lightgray;
+    }
+    >select {
+        height: 60px;
+        margin-top: 10px;
+        border: none;
+        background-color: lightgray;
+        width: 140px;
+    }
 `;
 
 export const StandardButton = styled.button`
@@ -543,5 +557,33 @@ export const DetailedArticleButtonSection = styled.section`
     >*{
         margin-bottom: 40px;
         margin-top: 40px;
+    }
+`;
+
+export const CreateArticleFormStyled = styled.form`
+    display: flex;
+    flex-direction: column;
+    width: 60vw;
+    margin: 0 auto;
+    margin-top: 60px;
+    >label{
+        font-weight: bold;
+    }
+    
+    >select{
+        font-size: 20px;
+        height: 40px;
+        border: solid 2px lightgray;
+        margin-top: 5px;
+        margin-bottom: 25px;
+        border-radius: 5px;
+    }
+    >input{
+        font-size: 20px;
+        height: 40px;
+        border: solid 2px lightgray;
+        margin-top: 5px;
+        margin-bottom: 25px;
+        border-radius: 5px;
     }
 `;

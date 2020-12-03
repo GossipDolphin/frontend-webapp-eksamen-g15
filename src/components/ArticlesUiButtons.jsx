@@ -1,12 +1,27 @@
 import React from 'react';
-import {ArticleButtonsUiSection, StandardButton} from "../styles/StyledComponents";
+import { ArticleButtonsUiSection, StandardButton } from "../styles/StyledComponents";
 
-const ArticlesUiButtons = () => {
-    return(
+const ArticlesUiButtons = ({ filterValue, setFilterValue, categoryList, setShowArticleForm }) => {
+
+    const toggleFilter = (e) => {
+        setFilterValue(e.target.value)
+    }
+    const showCreateForm = () => {
+        setShowArticleForm(true)
+    }
+    return (
         <ArticleButtonsUiSection>
-            <StandardButton>NY ARTIKKEL</StandardButton>
+            <StandardButton onClick={showCreateForm}>NY ARTIKKEL</StandardButton>
+            <textarea placeholder="SØK"></textarea>
             <StandardButton>SØK</StandardButton>
-            <StandardButton>FILTER</StandardButton>
+            <select value={filterValue} onChange={toggleFilter}>
+                <option value="">Ingen Filter</option>
+                {categoryList.map((category, index) => {
+                    return (
+                        <option key={index} value={category}>{category}</option>
+                    )
+                })}
+            </select>
         </ArticleButtonsUiSection>
     )
 }

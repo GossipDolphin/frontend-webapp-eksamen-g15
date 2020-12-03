@@ -50,18 +50,20 @@ const Offices = () => {
             <>
                 <Banner bannerTitle="Våre kontorer"></Banner>
                 <OfficesUiButtons setShowListUi={setShowListUi} setFilterValue={setFilterValue} filterValue={filterValue}></OfficesUiButtons>
-                {filterValue.length > 1 ? officeList.filter(office => office.location === filterValue).map(office => {
+                {filterValue.length > 1 ? officeList.filter(office => office.location === filterValue).map((office, index) => {
                     return (
                         <OfficesCollectionSection
+                            key={index}
                             location={office.location}
                             offices={office.offices}
                             showListUi={showListUi}
                             setDetailedOffice={setDetailedOffice}>
                         </OfficesCollectionSection>
                     )
-                }) : officeList.map(office => {
+                }) : officeList.map((office, index) => {
                     return (
                         <OfficesCollectionSection
+                            key={index}
                             location={office.location}
                             offices={office.offices}
                             showListUi={showListUi}
@@ -71,8 +73,8 @@ const Offices = () => {
                 }
             </> :
             <>
-            <Banner bannerTitle={"Kontor Rørlegger " + detailedOffice.nummer}></Banner>
-            <DetailedOffice detailedOffice={detailedOffice} setDetailedOffice={setDetailedOffice}></DetailedOffice>
+                <Banner bannerTitle={"Kontor Rørlegger " + detailedOffice.nummer}></Banner>
+                <DetailedOffice detailedOffice={detailedOffice} setDetailedOffice={setDetailedOffice}></DetailedOffice>
             </>}
             <Footer orgnr="007 007 007" email="lg@lgror.no" tlf="99 00 00 00"></Footer>
         </OfficesSection>

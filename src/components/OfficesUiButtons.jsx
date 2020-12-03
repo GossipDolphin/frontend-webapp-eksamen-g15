@@ -29,7 +29,7 @@ const OfficesUiButtons = ({ setShowListUi, setFilterValue, filterValue }) => {
                 <div></div>
             </button>
             <select value={filterValue} onChange={toggleFilterByLocation}>
-                <option value="0">Ingen filter</option>
+                <option value="">Ingen filter</option>
                 <option value="Fredrikstad">Fredrikstad</option>
                 <option value="Sarpsborg">Sarpsborg</option>
                 <option value="Moss">Moss</option>
