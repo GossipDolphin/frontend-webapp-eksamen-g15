@@ -1,8 +1,12 @@
 import React from 'react';
+import {RegisterAndLoginWrapperSection} from "../styles/StyledComponents";
+import Register from "../components/Register";
 
 const Login = () => {
     return(
-        <p>Login</p>
+        <RegisterAndLoginWrapperSection>
+            <Register></Register>
+        </RegisterAndLoginWrapperSection>
     )
 }
 

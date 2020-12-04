@@ -613,3 +613,30 @@ export const CategoryOptionSection = styled.section`
         color: white;
     }
 `;
+
+export const RegisterAndLoginWrapperSection = styled.section`
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+    margin: 0 auto;
+`;
+
+export const RegisterAndLoginForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    background-color: lightgray;
+    padding: 20px;
+    margin-top: 80px;
+    >input{
+        height: 30px;
+        margin-bottom: 20px;
+        border: solid 2px lightgray;
+    }
+    >button{
+        margin: 0 auto;
+        margin-top: 20px;
+        background-color: #43b8d9;
+        color: white;
+        font-size: 18px;
+    }
+`;
