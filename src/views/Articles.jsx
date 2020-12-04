@@ -75,9 +75,9 @@ const Articles = () => {
         return generatedArticles;
     }
 
-    const generatePageNumbers = () => {
+    const generatePageNumbers = (list) => {
         const pageNumbersGenerated = [];
-        for (let i = 1; i <= Math.ceil(articlesList.length / articlesPerPage); i++) {
+        for (let i = 1; i <= Math.ceil(list.length / articlesPerPage); i++) {
             pageNumbersGenerated.push(i);
         }
         return pageNumbersGenerated;
@@ -98,54 +98,61 @@ const Articles = () => {
     }, [])
 
     useEffect(() => {
+
+        const setColorOnSelectedPageNumber = () => {
+            pageNumbers.forEach(id => {
+                if (document.getElementById(id) !== null) {
+                    document.getElementById(id).style.backgroundColor = "gray";
+                    if (id === currentPage) {
+                        document.getElementById(id).style.backgroundColor = "black";
+                    }
+                }
+            });
+        }
+
         if (pageNumbers.length < 1) {
-            setPageNumbers(generatePageNumbers)
+            setPageNumbers(generatePageNumbers(articlesList))
         }
         if (detailedArticle === null) {
             setColorOnSelectedPageNumber();
         }
-    })
+    }, [pageNumbers.length, detailedArticle, articlesList, currentPage, pageNumbers])
 
     useEffect(() => {
-        setFilteredArticles(articlesList.filter(article => article.category === filterValue))
         if (filterValue.length > 1) {
-            setPageNumbers([1])
+            const filter = articlesList.filter(article => article.category === filterValue)
+            setFilteredArticles(filter)
+            setPageNumbers(generatePageNumbers(filter))
+            setCurrentPage(1)
         }
         else {
-            setPageNumbers(generatePageNumbers)
+            setPageNumbers(generatePageNumbers(articlesList))
         }
-    }, [filterValue])
+    }, [filterValue, articlesList])
 
-    const indexOfLastArticle = currentPage * articlesPerPage;
-    const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
-    const currentArticles = articlesList.slice(indexOfFirstArticle, indexOfLastArticle);
-
-    const setColorOnSelectedPageNumber = () => {
-        pageNumbers.forEach(id => {
-            if (document.getElementById(id) !== null) {
-                document.getElementById(id).style.backgroundColor = "gray";
-                if (id === currentPage) {
-                    document.getElementById(id).style.backgroundColor = "black";
-                }
-            }
-        });
+    const initCurrentArticles = (list) => {
+        const indexOfLastArticle = currentPage * articlesPerPage;
+        const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
+        const currentArticles = list.slice(indexOfFirstArticle, indexOfLastArticle);
+        return currentArticles;
     }
 
     return (
         <>{showArticleForm ? <>
             <Banner bannerTitle="Ny artikkel"></Banner>
             <CreateArticleForm></CreateArticleForm>
+            <Footer orgnr="007 007 007" email="lg@lgror.no" tlf="99 00 00 00"></Footer>
         </> :
             <>{detailedArticle === null ?
                 <>
                     <Banner bannerTitle="Fagartikler"></Banner>
                     <ArticlesSection>
                         <ArticlesUiButtons filterValue={filterValue} setFilterValue={setFilterValue} categoryList={categoryList} setShowArticleForm={setShowArticleForm}></ArticlesUiButtons>
-                        {filterValue.length > 1 ? filteredArticles.map((article, index) => {
+                        {filterValue.length > 1 ? initCurrentArticles(filteredArticles).map((article, index) => {
                             return (
                                 <ArticleCard key={index} article={article} setDetailedArticle={setDetailedArticle}></ArticleCard>
                             )
-                        }) : currentArticles.map((article, index) => {
+                        }) : initCurrentArticles(articlesList).map((article, index) => {
                             return (
                                 <ArticleCard key={index} article={article} setDetailedArticle={setDetailedArticle}></ArticleCard>
                             )

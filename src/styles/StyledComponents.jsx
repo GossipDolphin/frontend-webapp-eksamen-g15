@@ -563,16 +563,16 @@ export const DetailedArticleButtonSection = styled.section`
 export const CreateArticleFormStyled = styled.form`
     display: flex;
     flex-direction: column;
-    width: 60vw;
+    width: 55vw;
     margin: 0 auto;
-    margin-top: 60px;
+    margin-top: 80px;
     >label{
         font-weight: bold;
     }
     
     >select{
         font-size: 20px;
-        height: 40px;
+        height: 50px;
         border: solid 2px lightgray;
         margin-top: 5px;
         margin-bottom: 25px;
@@ -580,10 +580,36 @@ export const CreateArticleFormStyled = styled.form`
     }
     >input{
         font-size: 20px;
-        height: 40px;
+        height: 50px;
         border: solid 2px lightgray;
         margin-top: 5px;
         margin-bottom: 25px;
         border-radius: 5px;
+    }
+    >button{
+        margin-bottom: 10px;
+    }
+`;
+
+export const CategoryOptionSection = styled.section`
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 25px;
+    >*{
+        height: 50px;
+    }
+    >:first-child{
+        width:50vw;
+        margin-right: 20px;
+        font-size: 20px;
+        border: solid 2px lightgray;
+        border-radius: 5px;
+    }
+    >:last-child{
+        width: 6vw;
+        margin-right: 0;
+        border: none;
+        background-color: #43b8d9;
+        color: white;
     }
 `;
