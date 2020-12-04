@@ -1,11 +1,16 @@
-import React from 'react';
-import {RegisterAndLoginWrapperSection} from "../styles/StyledComponents";
+import React, { useState } from 'react';
+import { RegisterAndLoginWrapperSection } from "../styles/StyledComponents";
 import Register from "../components/Register";
+import LoginComp from "../components/Login";
 
 const Login = () => {
-    return(
+    const [ShowRegister, setShowRegister] = useState(false);
+    return (
         <RegisterAndLoginWrapperSection>
-            <Register></Register>
+            {ShowRegister ?
+                <Register></Register> :
+                <LoginComp setShowRegister={setShowRegister}></LoginComp>
+            }
         </RegisterAndLoginWrapperSection>
     )
 }
