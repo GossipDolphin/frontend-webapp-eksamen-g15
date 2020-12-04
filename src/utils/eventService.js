@@ -13,7 +13,7 @@ export const register = async (data) => {
 
 export const getUserInfo = async () => {
   try {
-    return await http.get("/me");
+    return await http.get("/user/me");
   } catch (err) {
     return err.reponse;
   }
