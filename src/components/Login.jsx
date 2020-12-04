@@ -3,13 +3,11 @@ import {StandardButton, RegisterAndLoginForm} from "../styles/StyledComponents"
 import { useAuthContext } from "../context/AuthProvider"
 import { login } from "../utils/eventService"
 
-
-
 const LoginComp = ({setShowRegister}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
-    const setUser = useAuthContext();
+    const {setUser} = useAuthContext();
     const goToRegister = () => {
         setShowRegister(true)
     }
