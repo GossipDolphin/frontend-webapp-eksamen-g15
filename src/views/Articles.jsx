@@ -4,8 +4,9 @@ import Banner from "../components/Banner";
 import ArticlesUiButtons from "../components/ArticlesUiButtons"
 import ArticleCard from "../components/ArticleCard";
 import Footer from "../components/Footer";
-import DetailedArticle from "../components/DetailedArticle"
-import CreateArticleForm from "../components/CreateArticleForm"
+import DetailedArticle from "../components/DetailedArticle";
+import CreateArticleForm from "../components/CreateArticleForm";
+import { getCategories } from "../utils/articleService";
 
 const Articles = () => {
 
@@ -82,42 +83,57 @@ const Articles = () => {
         }
         return pageNumbersGenerated;
     }
-
+    /*
     //change it to return categories from api call
-    const getCategoryes = () => {
-        categoryList.push("Avløpsrens");
-        categoryList.push("Vask Montering");
+    const getCategoryes = async () => {
+        const { data, err } = await getCategories();
+        if (err) {
+            console.log(err)
+        }
+        else {
+            setCategoryList(data)
+        }
         return categoryList;
     }
+    */
 
     useEffect(() => {
-        setArticlesList(generateArticles)
-        if (categoryList.length < 1) {
-            setCategoryList(getCategoryes)
+        //setArticlesList(generateArticles)
+
+        const fetchData = async () => {
+            const {data, err} = await getCategories();
+            if (err) {
+                console.log(err)
+            }
+            else {
+                setCategoryList(data);
+                console.log(data)
+            }
         }
+        fetchData();
     }, [])
-
-    useEffect(() => {
-
-        const setColorOnSelectedPageNumber = () => {
-            pageNumbers.forEach(id => {
-                if (document.getElementById(id) !== null) {
-                    document.getElementById(id).style.backgroundColor = "gray";
-                    if (id === currentPage) {
-                        document.getElementById(id).style.backgroundColor = "black";
+    /*
+        useEffect(() => {
+    
+            const setColorOnSelectedPageNumber = () => {
+                pageNumbers.forEach(id => {
+                    if (document.getElementById(id) !== null) {
+                        document.getElementById(id).style.backgroundColor = "gray";
+                        if (id === currentPage) {
+                            document.getElementById(id).style.backgroundColor = "black";
+                        }
                     }
-                }
-            });
-        }
-
-        if (pageNumbers.length < 1) {
-            setPageNumbers(generatePageNumbers(articlesList))
-        }
-        if (detailedArticle === null) {
-            setColorOnSelectedPageNumber();
-        }
-    }, [pageNumbers.length, detailedArticle, articlesList, currentPage, pageNumbers])
-
+                });
+            }
+    
+            if (pageNumbers.length < 1) {
+                setPageNumbers(generatePageNumbers(articlesList))
+            }
+            if (detailedArticle === null) {
+                setColorOnSelectedPageNumber();
+            }
+        }, [pageNumbers.length, detailedArticle, articlesList, currentPage, pageNumbers])
+        */
     useEffect(() => {
         if (filterValue.length > 1) {
             const filter = articlesList.filter(article => article.category === filterValue)
@@ -140,7 +156,7 @@ const Articles = () => {
     return (
         <>{showArticleForm ? <>
             <Banner bannerTitle="Ny artikkel"></Banner>
-            <CreateArticleForm></CreateArticleForm>
+            <CreateArticleForm setCategoryList={setCategoryList} categoryList={categoryList}></CreateArticleForm>
             <Footer orgnr="007 007 007" email="lg@lgror.no" tlf="99 00 00 00"></Footer>
         </> :
             <>{detailedArticle === null ?

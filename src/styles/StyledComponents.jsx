@@ -384,14 +384,21 @@ export const ArticleButtonsUiSection = styled.section`
     font-weight: bold;
     font-size: 13px;
     margin-bottom: 40px;
-    >:first-child{
+    >button:first-child{
         margin-right: auto;
         margin-left: 0;
         background-color: #43b8d9;
         color: white;
+        :hover{
+            background-color: darkgray;
+            cursor: pointer;
+        }
     }
     >*{
         margin-left: 10px;
+    }
+    >textarea:first-child{
+        margin-left: auto;
     }
     >textArea{
         height: 30px;
@@ -612,6 +619,12 @@ export const CategoryOptionSection = styled.section`
         background-color: #43b8d9;
         color: white;
     }
+    >button{
+        :hover{
+            background-color: darkgray;
+            cursor: pointer;
+        }
+    }
 `;
 
 export const RegisterAndLoginWrapperSection = styled.section`
@@ -645,6 +658,57 @@ export const RegisterAndLoginForm = styled.form`
         background-color: #43b8d9;
         color: white;
         font-size: 18px;
+        :hover{
+            cursor: pointer;
+            background-color: darkgray;
+        }
+    }
+`;
+
+export const CreateCategoryFormWrapper = styled.section`
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    overflow:hidden;
+    z-index:2;
+    height: 150vh;
+    background-color:rgba(0,0,0,0.3);
+    display: flex;
+`;
+
+export const CreateCategoryForm = styled.form`
+    background-color: white;
+    width: 400px;
+    height: 170px;
+    opacity: 1;
+    margin: auto auto;
+    display: flex;
+    flex-direction: column;
+    >*{
+        margin: 10px;
+    }
+    >label{
+        margin-left: 45px;
+        font-weight: bold;
+        margin-top: 30px;
+    }
+    >textarea{
+        margin: 0 auto;
+        width: 300px;
+        resize: none;
+        border: solid lightgray 2px;
+    }
+    >button{
+        height: 40px;
+        width: 100px;
+        text-align: center;
+        line-height: 25px;
+        margin-left: auto;
+        margin-right: 45px;
+        color: white;
+        background-color: #43b8d9;
         :hover{
             cursor: pointer;
             background-color: darkgray;
