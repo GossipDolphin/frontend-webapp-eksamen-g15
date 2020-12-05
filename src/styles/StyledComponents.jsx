@@ -376,35 +376,42 @@ export const ArticlesSection = styled.section`
 `;
 
 export const ArticleButtonsUiSection = styled.section`
-  display: flex;
-  flex-direction: row;
-  margin-top: 50px;
-  font-weight: bold;
-  font-size: 13px;
-  margin-bottom: 40px;
-  > :first-child {
-    margin-right: auto;
-    margin-left: 0;
-    background-color: #43b8d9;
-    color: white;
-  }
-  > * {
-    margin-left: 10px;
-  }
-  > textArea {
-    height: 30px;
-    margin-top: 22px;
-    font-size: 18px;
-    resize: none;
-    border: solid 2px lightgray;
-  }
-  > select {
-    height: 60px;
-    margin-top: 10px;
-    border: none;
-    background-color: lightgray;
-    width: 140px;
-  }
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 40px;
+    >button:first-child{
+        margin-right: auto;
+        margin-left: 0;
+        background-color: #43b8d9;
+        color: white;
+        :hover{
+            background-color: darkgray;
+            cursor: pointer;
+        }
+    }
+    >*{
+        margin-left: 10px;
+    }
+    >textarea:first-child{
+        margin-left: auto;
+    }
+    >textArea{
+        height: 30px;
+        margin-top: 22px;
+        font-size: 18px;
+        resize: none;
+        border: solid 2px lightgray;
+    }
+    >select {
+        height: 60px;
+        margin-top: 10px;
+        border: none;
+        background-color: lightgray;
+        width: 140px;
+    }
 `;
 
 export const StandardButton = styled.button`
@@ -588,26 +595,32 @@ export const CreateArticleFormStyled = styled.form`
 `;
 
 export const CategoryOptionSection = styled.section`
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 25px;
-  > * {
-    height: 50px;
-  }
-  > :first-child {
-    width: 50vw;
-    margin-right: 20px;
-    font-size: 20px;
-    border: solid 2px lightgray;
-    border-radius: 5px;
-  }
-  > :last-child {
-    width: 6vw;
-    margin-right: 0;
-    border: none;
-    background-color: #43b8d9;
-    color: white;
-  }
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 25px;
+    >*{
+        height: 50px;
+    }
+    >:first-child{
+        width:50vw;
+        margin-right: 20px;
+        font-size: 20px;
+        border: solid 2px lightgray;
+        border-radius: 5px;
+    }
+    >:last-child{
+        width: 6vw;
+        margin-right: 0;
+        border: none;
+        background-color: #43b8d9;
+        color: white;
+    }
+    >button{
+        :hover{
+            background-color: darkgray;
+            cursor: pointer;
+        }
+    }
 `;
 
 export const RegisterAndLoginWrapperSection = styled.section`
@@ -618,32 +631,83 @@ export const RegisterAndLoginWrapperSection = styled.section`
 `;
 
 export const RegisterAndLoginForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  background-color: lightgray;
-  padding: 20px;
-  margin-top: 80px;
-  > input {
-    height: 30px;
-    margin-bottom: 20px;
-    border: solid 2px lightgray;
-  }
-  > p {
-    color: #43b8d9;
-    :hover {
-      cursor: pointer;
-      text-decoration: underline;
+    display: flex;
+    flex-direction: column;
+    background-color: lightgray;
+    padding: 20px;
+    margin-top: 80px;
+    >input{
+        height: 30px;
+        margin-bottom: 20px;
+        border: solid 2px lightgray;
     }
-  }
-  > button {
-    margin: 0 auto;
-    margin-top: 20px;
-    background-color: #43b8d9;
-    color: white;
-    font-size: 18px;
-    :hover {
-      cursor: pointer;
-      background-color: darkgray;
+    >p{
+        color: #43b8d9;
+        :hover{
+            cursor: pointer;
+            text-decoration: underline;
+        }
     }
-  }
+    >button{
+        margin: 0 auto;
+        margin-top: 20px;
+        background-color: #43b8d9;
+        color: white;
+        font-size: 18px;
+        :hover{
+            cursor: pointer;
+            background-color: darkgray;
+        }
+    }
+`;
+
+export const CreateCategoryFormWrapper = styled.section`
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    overflow:hidden;
+    z-index:2;
+    height: 150vh;
+    background-color:rgba(0,0,0,0.3);
+    display: flex;
+`;
+
+export const CreateCategoryForm = styled.form`
+    background-color: white;
+    width: 400px;
+    height: 170px;
+    opacity: 1;
+    margin: auto auto;
+    display: flex;
+    flex-direction: column;
+    >*{
+        margin: 10px;
+    }
+    >label{
+        margin-left: 45px;
+        font-weight: bold;
+        margin-top: 30px;
+    }
+    >textarea{
+        margin: 0 auto;
+        width: 300px;
+        resize: none;
+        border: solid lightgray 2px;
+    }
+    >button{
+        height: 40px;
+        width: 100px;
+        text-align: center;
+        line-height: 25px;
+        margin-left: auto;
+        margin-right: 45px;
+        color: white;
+        background-color: #43b8d9;
+        :hover{
+            cursor: pointer;
+            background-color: darkgray;
+        }
+    }
 `;

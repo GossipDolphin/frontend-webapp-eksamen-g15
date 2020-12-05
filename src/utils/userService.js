@@ -28,11 +28,11 @@ export const login = async (data) => {
 };
 
 export const logout = async () => {
-    try {
-        return await http.post(`${API_LOGOUT_URL}`);
-    } catch (err) {
-        return err.response;
-    }
-}
+  try {
+    return await http.post(`${API_LOGOUT_URL}`);
+  } catch (err) {
+    return err.response;
+  }
+};
 
 export default { register, getUserInfo, logout };
