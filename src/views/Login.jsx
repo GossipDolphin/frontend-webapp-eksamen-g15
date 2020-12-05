@@ -5,11 +5,12 @@ import LoginComp from "../components/Login";
 
 const Login = () => {
     const [ShowRegister, setShowRegister] = useState(false);
+    const [success, setSuccess] = useState(false);
     return (
         <RegisterAndLoginWrapperSection>
             {ShowRegister ?
-                <Register></Register> :
-                <LoginComp setShowRegister={setShowRegister}></LoginComp>
+                <Register setShowRegister={setShowRegister} setSuccess={setSuccess} success={success}></Register> :
+                <LoginComp setShowRegister={setShowRegister} setSuccess={setSuccess} success={success}></LoginComp>
             }
         </RegisterAndLoginWrapperSection>
     )

@@ -617,7 +617,7 @@ export const CategoryOptionSection = styled.section`
 export const RegisterAndLoginWrapperSection = styled.section`
     display: flex;
     flex-direction: column;
-    width: 30vw;
+    width: 350px;
     margin: 0 auto;
 `;
 
@@ -632,11 +632,22 @@ export const RegisterAndLoginForm = styled.form`
         margin-bottom: 20px;
         border: solid 2px lightgray;
     }
+    >p{
+        color: #43b8d9;
+        :hover{
+            cursor: pointer;
+            text-decoration: underline;
+        }
+    }
     >button{
         margin: 0 auto;
         margin-top: 20px;
         background-color: #43b8d9;
         color: white;
         font-size: 18px;
+        :hover{
+            cursor: pointer;
+            background-color: darkgray;
+        }
     }
 `;

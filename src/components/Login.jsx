@@ -2,12 +2,16 @@ import React, {useState, useEffect} from 'react';
 import {StandardButton, RegisterAndLoginForm} from "../styles/StyledComponents"
 import { useAuthContext } from "../context/AuthProvider"
 import { login } from "../utils/eventService"
+import { Redirect } from 'react-router';
 
-const LoginComp = ({setShowRegister}) => {
+
+const LoginComp = ({setShowRegister, setSuccess, success}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
     const {setUser} = useAuthContext();
+    const [redirect, setRedirect] = useState(false);
+
     const goToRegister = () => {
         setShowRegister(true)
     }
@@ -24,9 +28,10 @@ const LoginComp = ({setShowRegister}) => {
         else{
             const user = data?.user;
             const expire = JSON.parse(window.atob(data.token.split('.')[1])).exp;
-            setMessage("success registered")
+            setMessage("success LoggedInn")
             console.log(data)
             setUser({...user, expire})
+            setSuccess(true);
         }
 
     }
@@ -39,15 +44,26 @@ const LoginComp = ({setShowRegister}) => {
         setPassword(e.target.value);
     }
 
+    const handleOnclickNavigation = () => {
+        setRedirect(true);
+    }
+    if(redirect){
+        return <Redirect push to={"/Home"} />;
+    }
+
     return(
         <RegisterAndLoginForm>
+            {!success ? <>
             <label htmlFor="emial">E-post</label>
-            <input onChange={handleEmailChange} type="textarea" placeholder="E-post"></input>
+            <input onChange={handleEmailChange} type="textarea" placeholder="E-post" autoComplete="email"></input>
             <label htmlFor="password">Passord</label>
-            <input onChange={handlePasswordChange} type="password" placeholder="Passord"></input>
+            <input onChange={handlePasswordChange} type="password" placeholder="Passord" autoComplete="current-password"></input>
             <p>{message}</p>
             <StandardButton onClick={handleLogin}>Login</StandardButton>
-            <StandardButton onClick={goToRegister}>Register</StandardButton>
+            <p onClick={goToRegister}>Register</p>
+            </> : <> <p>{message}</p>
+                    <StandardButton onClick={handleOnclickNavigation}>Ok</StandardButton>
+                </>}
         </RegisterAndLoginForm>
     )
 }

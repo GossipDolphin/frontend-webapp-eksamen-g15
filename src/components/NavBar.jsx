@@ -6,7 +6,7 @@ import { logout } from '../utils/eventService.js';
 
 
 const NavBar = () => {
-    const {isLoggedId, isAdmin, setUser} = useAuthContext();
+    const {isLoggedIn, isAdmin, setUser} = useAuthContext();
     const handleLogout = async (e) => {
         await logout();
         setUser(null);
@@ -15,7 +15,7 @@ const NavBar = () => {
         <NavBarStyled>
             <p>FG</p>
             <ul>
-                {isLoggedId ? 
+                {!isLoggedIn ? 
                 <li><NavLink activeClassName="active" to="/Login">Login</NavLink></li> 
                 : <li><NavLink activeClassName="active" to="/Home" onClick={handleLogout}>Logout</NavLink></li>}
                 

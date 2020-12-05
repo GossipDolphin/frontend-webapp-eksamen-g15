@@ -14,8 +14,10 @@ const AuthProvider = ({children}) => {
         const fetchUserData = async () => {
             if(user === null){
                 setLoading(true);
-                const { data } = await getUserInfo();
-
+                const success = await getUserInfo();
+                if(success){
+                    const {data} = await getUserInfo();
+                
                 if(data?.success){
                     const currentUser = data.data;
                     setUser(currentUser);   
@@ -25,6 +27,7 @@ const AuthProvider = ({children}) => {
                 }
                 setLoading(false)
             }
+        }
         }
         fetchUserData();
     }, [user])
