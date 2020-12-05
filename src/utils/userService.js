@@ -1,8 +1,7 @@
 import http from "./http.js";
-
-const API_REGISTER_URL = "/user/register";
-const API_LOGIN_URL = "/user/login";
-const API_LOGOUT_URL = "/user/logout";
+const API_REGISTER_URL = "./user/register";
+const API_LOGIN_URL = './user/login';
+const API_LOGOUT_URL = "./user/logout";
 
 export const register = async (data) => {
   try {
