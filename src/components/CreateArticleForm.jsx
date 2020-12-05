@@ -120,7 +120,7 @@ const CreateArticleForm = ({ categoryList }) => {
       <CategoryOptionSection>
         <select value={category} onChange={handleCatheroyChange}>
           {categoryList.map((category, index) => (
-            <option key={index} value={category.id}>
+            <option key={index} value={category._id}>
               {category.name}
             </option>
           ))}
