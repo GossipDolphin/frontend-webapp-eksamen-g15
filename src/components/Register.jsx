@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StandardButton, RegisterAndLoginForm } from "../styles/StyledComponents"
-import { register } from "../utils/eventService"
+import { register } from "../utils/userService"
 import { useAuthContext } from "../context/AuthProvider"
 import { Redirect } from 'react-router';
 
@@ -17,17 +17,17 @@ const Register = ({ setShowRegister, setSuccess, success }) => {
     const handleNameChange = (e) => {
         setName(e.target.value)
     }
+
     const handleEmailChange = (e) => {
         setEmail(e.target.value)
-
     }
+
     const handlePasswordChange = (e) => {
         setPassword(e.target.value)
-
     }
+
     const handlePasswordRepeatedChange = (e) => {
         setPasswordRepeted(e.target.value)
-
     }
 
     const goToLogin = (e) => {

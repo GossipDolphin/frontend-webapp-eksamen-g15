@@ -1,15 +1,15 @@
-import React, {useState, useEffect} from 'react';
-import {StandardButton, RegisterAndLoginForm} from "../styles/StyledComponents"
+import React, { useState, useEffect } from 'react';
+import { StandardButton, RegisterAndLoginForm } from "../styles/StyledComponents"
 import { useAuthContext } from "../context/AuthProvider"
-import { login } from "../utils/eventService"
+import { login } from "../utils/userService"
 import { Redirect } from 'react-router';
 
 
-const LoginComp = ({setShowRegister, setSuccess, success}) => {
+const LoginComp = ({ setShowRegister, setSuccess, success }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
-    const {setUser} = useAuthContext();
+    const { setUser } = useAuthContext();
     const [redirect, setRedirect] = useState(false);
 
     const goToRegister = () => {
@@ -25,18 +25,18 @@ const LoginComp = ({setShowRegister, setSuccess, success}) => {
         if (!data.success) {
             setMessage(data.message);
         }
-        else{
+        else {
             const user = data?.user;
             const expire = JSON.parse(window.atob(data.token.split('.')[1])).exp;
             setMessage("success LoggedInn")
             console.log(data)
-            setUser({...user, expire})
+            setUser({ ...user, expire })
             setSuccess(true);
         }
 
     }
 
-    const handleEmailChange = (e) =>{
+    const handleEmailChange = (e) => {
         setEmail(e.target.value);
     }
 
@@ -47,20 +47,20 @@ const LoginComp = ({setShowRegister, setSuccess, success}) => {
     const handleOnclickNavigation = () => {
         setRedirect(true);
     }
-    if(redirect){
+    if (redirect) {
         return <Redirect push to={"/Home"} />;
     }
 
-    return(
+    return (
         <RegisterAndLoginForm>
             {!success ? <>
-            <label htmlFor="emial">E-post</label>
-            <input onChange={handleEmailChange} type="textarea" placeholder="E-post" autoComplete="email"></input>
-            <label htmlFor="password">Passord</label>
-            <input onChange={handlePasswordChange} type="password" placeholder="Passord" autoComplete="current-password"></input>
-            <p>{message}</p>
-            <StandardButton onClick={handleLogin}>Login</StandardButton>
-            <p onClick={goToRegister}>Register</p>
+                <label htmlFor="emial">E-post</label>
+                <input onChange={handleEmailChange} type="textarea" placeholder="E-post" autoComplete="email"></input>
+                <label htmlFor="password">Passord</label>
+                <input onChange={handlePasswordChange} type="password" placeholder="Passord" autoComplete="current-password"></input>
+                <p>{message}</p>
+                <StandardButton onClick={handleLogin}>Login</StandardButton>
+                <p onClick={goToRegister}>Register</p>
             </> : <> <p>{message}</p>
                     <StandardButton onClick={handleOnclickNavigation}>Ok</StandardButton>
                 </>}

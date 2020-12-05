@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from 'react-router-dom'
 import { useAuthContext } from "../context/AuthProvider";
 import { NavBarStyled } from '../styles/StyledComponents';
-import { logout } from '../utils/eventService.js';
+import { logout } from '../utils/userService.js';
 
 
 const NavBar = () => {
