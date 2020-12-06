@@ -117,8 +117,7 @@ const Register = ({ setShowRegister, setSuccess, success }) => {
         </>
       ) : (
         <>
-          {' '}
-          <p>{message}</p>
+          <h3>{message}</h3>
           <StandardButton onClick={handleOnclickNavigation}>Ok</StandardButton>
         </>
       )}

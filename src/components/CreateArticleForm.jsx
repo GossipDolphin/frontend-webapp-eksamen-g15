@@ -19,6 +19,7 @@ const CreateArticleForm = ({ categoryList }) => {
   const [contentTwo, setContentTwo] = useState('');
   const [category, setCategory] = useState('');
   const [author, setAuthor] = useState('');
+  const [secret, setSecret] = useState(false);
   const [isNewCategory, setIsNewCategory] = useState(false);
   const [message, setMessage] = useState('');
 
@@ -46,6 +47,9 @@ const CreateArticleForm = ({ categoryList }) => {
   const handleAuthorChange = (e) => {
     setAuthor(e.target.value);
   };
+  const handleSecretChange = () => {
+    setSecret(!secret);
+  };
   const handleClickNewCatgegory = (e) => {
     e.preventDefault();
     setIsNewCategory(true);
@@ -70,6 +74,7 @@ const CreateArticleForm = ({ categoryList }) => {
         contentTwo,
         category,
         author,
+        secret,
       });
       if (!data.success) {
         setMessage(data.message);
@@ -137,6 +142,8 @@ const CreateArticleForm = ({ categoryList }) => {
           </option>
         ))}
       </select>
+      <label>Hemmelig</label>
+      <input onChange={handleSecretChange} type="checkbox" />
       <p>{message}</p>
       <StandardButton onClick={handleClickNewArticle}>CREATE</StandardButton>
     </CreateArticleFormStyled>
