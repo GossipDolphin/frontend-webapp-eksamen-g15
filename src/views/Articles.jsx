@@ -40,6 +40,7 @@ const Articles = ({ match }) => {
       if (!data.success) {
         console.log(data.message);
       } else {
+        console.log(data.data);
         setArticlesList(data.data);
       }
     };
@@ -49,6 +50,7 @@ const Articles = ({ match }) => {
       if (!data.success) {
         console.log(data.message);
       } else {
+        console.log(data.data);
         setCategoryList(data.data);
       }
     };
@@ -109,6 +111,8 @@ const Articles = ({ match }) => {
           <CreateArticleForm
             setCategoryList={setCategoryList}
             categoryList={categoryList}
+            setShowArticleForm={setShowArticleForm}
+            setDetailedArticle={setDetailedArticle}
           />
           <Footer orgnr="007 007 007" email="lg@lgror.no" tlf="99 00 00 00" />
         </>

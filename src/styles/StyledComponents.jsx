@@ -599,6 +599,12 @@ export const CreateArticleFormStyled = styled.form`
     border-radius: 5px;
     border: 2px solid #555;
   }
+  > :nth-child(20) {
+    width: 220px;
+    height: 30px;
+    border: none;
+    font-size: 16px;
+  }
 `;
 
 export const CategoryOptionSection = styled.section`

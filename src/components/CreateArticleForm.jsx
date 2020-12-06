@@ -8,7 +8,11 @@ import CreateCategory from './CreateCategory';
 import { useAuthContext } from '../context/AuthProvider';
 import { createArticle } from '../utils/articleService';
 
-const CreateArticleForm = ({ categoryList }) => {
+const CreateArticleForm = ({
+  categoryList,
+  setShowArticleForm,
+  setDetailedArticle,
+}) => {
   const { isAdmin } = useAuthContext();
   const authors = ['Petter', 'Kalle', 'Bjørnson'];
   const [title, setTitle] = useState('');
@@ -22,6 +26,10 @@ const CreateArticleForm = ({ categoryList }) => {
   const [secret, setSecret] = useState(false);
   const [isNewCategory, setIsNewCategory] = useState(false);
   const [message, setMessage] = useState('');
+  const [success, setSuccess] = useState(false);
+  const [createdArticle, setCreatedArticle] = useState({});
+  const [image, setImage] = useState();
+  const [imageUrl, setImageUrl] = useState('');
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -54,6 +62,13 @@ const CreateArticleForm = ({ categoryList }) => {
     e.preventDefault();
     setIsNewCategory(true);
   };
+  const handleImageUpload = (e) => {
+    console.log(e.target.value);
+  };
+  const handleClickSeeArticle = () => {
+    setShowArticleForm(false);
+    setDetailedArticle(createdArticle);
+  };
 
   useEffect(() => {
     setAuthor(authors[0]);
@@ -81,7 +96,9 @@ const CreateArticleForm = ({ categoryList }) => {
         console.log(data);
       } else {
         setMessage('success created');
-        console.log(data.message);
+        setSuccess(true);
+        setCreatedArticle(data.data);
+        console.log(data.data);
       }
     } else {
       setMessage('Ingen title skrevet inn');
@@ -144,8 +161,23 @@ const CreateArticleForm = ({ categoryList }) => {
       </select>
       <label>Hemmelig</label>
       <input onChange={handleSecretChange} type="checkbox" />
+      <label>Last opp bilde</label>
+      <input
+        value={image}
+        onChange={handleImageUpload}
+        type="file"
+        id="myfile"
+        name="myfile"
+        accept="image/png,image/jpeg,image/jpg"
+      />
       <p>{message}</p>
-      <StandardButton onClick={handleClickNewArticle}>CREATE</StandardButton>
+      {!success ? (
+        <StandardButton onClick={handleClickNewArticle}>CREATE</StandardButton>
+      ) : (
+        <StandardButton onClick={handleClickSeeArticle}>
+          Se Arikkel
+        </StandardButton>
+      )}
     </CreateArticleFormStyled>
   );
 };
