@@ -11,8 +11,10 @@ const DetailedArticle = ({ detailedArticle, setDetailedArticle }) => {
   const handleBackClick = () => {
     setRedirect(true);
   };
-  if(redirect){
-    setDetailedArticle(null);
+  if (redirect) {
+    setTimeout(() => {
+      setDetailedArticle(null);
+    }, 10);
     const url = '/Articles';
     return <Redirect path to={url} />;
   }
@@ -22,7 +24,7 @@ const DetailedArticle = ({ detailedArticle, setDetailedArticle }) => {
       <button onClick={handleBackClick}>TILBAKE</button>
       <section>
         <p>Av {detailedArticle.author}</p>
-        <p>{new Date(detailedArticle.createdAt).toLocaleDateString("NO-no")}</p>
+        <p>{new Date(detailedArticle.createdAt).toLocaleDateString('NO-no')}</p>
       </section>
       <p>{detailedArticle.summary}</p>
       <h2>{detailedArticle.subtitleOne}</h2>

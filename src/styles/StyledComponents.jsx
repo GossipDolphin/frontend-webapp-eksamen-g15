@@ -180,12 +180,20 @@ export const BannerStyled = styled.section`
   height: 310px;
   background-color: lightgray;
   width: 100%;
-  display: flex;
   flex-direction: row;
   align-items: center;
-  > * {
-    margin: 0 auto;
+  > h1 {
+    position: absolute;
+    top: 18%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     font-size: 40px;
+    z-index: 2;
+  }
+  > img {
+    height: 310px;
+    position: absolute;
+    width: 100vw;
   }
 `;
 

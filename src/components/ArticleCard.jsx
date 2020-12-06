@@ -10,16 +10,29 @@ const ArticleCard = ({ article, setDetailedArticle }) => {
 
   if (redirect) {
     const url = `/Articles/${article.id}`;
-    setDetailedArticle(article);
+    setTimeout(() => {
+      setDetailedArticle(article);
+    }, 10);
     return <Redirect path to={url} />;
   }
 
   return (
     <ArticleCardWrapperGrid onClick={handleOnClick}>
-      <section />
-      <h2>{article.title}</h2>
-      <p>{article.category.name}</p>
-      <p>{article.ingress}</p>
+      {article.image !== undefined ? (
+        <>
+          <img src={article.image.file_path} />
+          <h2>{article.title}</h2>
+          <p>{article.category.name}</p>
+          <p>{article.ingress}</p>
+        </>
+      ) : (
+        <>
+          <section />
+          <h2>{article.title}</h2>
+          <p>{article.category.name}</p>
+          <p>{article.ingress}</p>
+        </>
+      )}
     </ArticleCardWrapperGrid>
   );
 };

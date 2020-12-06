@@ -124,7 +124,12 @@ const CreateArticleForm = ({
       <label htmlFor="Tittel">Tittel</label>
       <input value={title} onChange={handleTitleChange} type="textarea" />
       <label htmlFor="Ingress">Ingress</label>
-      <input value={summary} onChange={handleSummaryChange} type="textarea" />
+      <input
+        maxLength="70"
+        value={summary}
+        onChange={handleSummaryChange}
+        type="textarea"
+      />
       <label htmlFor="Under Tittel 1">Under Tittel 1</label>
       <input
         value={subTitleOne}
