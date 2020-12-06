@@ -6,7 +6,7 @@ import {
 } from '../styles/StyledComponents';
 import CreateCategory from './CreateCategory';
 import { useAuthContext } from '../context/AuthProvider';
-import { createArticle } from '../utils/articleService';
+import { createArticle, createImage } from '../utils/articleService';
 
 const CreateArticleForm = ({
   categoryList,
@@ -28,8 +28,8 @@ const CreateArticleForm = ({
   const [message, setMessage] = useState('');
   const [success, setSuccess] = useState(false);
   const [createdArticle, setCreatedArticle] = useState({});
-  const [image, setImage] = useState();
-  const [imageUrl, setImageUrl] = useState('');
+  const [image, setImage] = useState(null);
+  const [imageId, setImageId] = useState('');
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -62,8 +62,18 @@ const CreateArticleForm = ({
     e.preventDefault();
     setIsNewCategory(true);
   };
-  const handleImageUpload = (e) => {
-    console.log(e.target.value);
+  const handleImageUpload = async (e) => {
+    if (e.target.files[0] !== null) {
+      const { data } = await createImage(e.target.files[0]);
+      if (!data.success) {
+        setMessage(data.message);
+        console.log(data);
+      } else {
+        setImageId(data.data._id);
+        console.log(data.data._id);
+        setMessage('Image added');
+      }
+    }
   };
   const handleClickSeeArticle = () => {
     setShowArticleForm(false);
@@ -90,6 +100,7 @@ const CreateArticleForm = ({
         category,
         author,
         secret,
+        image: imageId,
       });
       if (!data.success) {
         setMessage(data.message);
@@ -163,7 +174,7 @@ const CreateArticleForm = ({
       <input onChange={handleSecretChange} type="checkbox" />
       <label>Last opp bilde</label>
       <input
-        value={image}
+        file={image}
         onChange={handleImageUpload}
         type="file"
         id="myfile"
