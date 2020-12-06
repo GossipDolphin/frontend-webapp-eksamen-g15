@@ -40,7 +40,6 @@ const Articles = ({ match }) => {
       if (!data.success) {
         console.log(data.message);
       } else {
-        console.log(data.data);
         setArticlesList(data.data);
       }
     };
@@ -51,7 +50,6 @@ const Articles = ({ match }) => {
         console.log(data.message);
       } else {
         setCategoryList(data.data);
-        console.log(data.data);
       }
     };
     fetchArticles();
@@ -75,7 +73,13 @@ const Articles = ({ match }) => {
     if (detailedArticle === null) {
       setColorOnSelectedPageNumber();
     }
-  }, [pageNumbers.length, detailedArticle, articlesList, currentPage]);
+  }, [
+    pageNumbers.length,
+    detailedArticle,
+    articlesList,
+    currentPage,
+    pageNumbers,
+  ]);
 
   useEffect(() => {
     if (filterValue.length > 1) {
