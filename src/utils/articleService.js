@@ -41,8 +41,11 @@ export const getArticles = async () => {
 export const getArticleByid = async (id) => {
   try {
     return await http.get(`${API_GET_ARTICLES_URL}/${id}`);
+  } catch (err) {
+    return err.response;
+  }
+};
 
-    
 export const createImage = async (image) => {
   try {
     const data = new FormData();
