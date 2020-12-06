@@ -75,7 +75,6 @@ const LoginComp = ({ setShowRegister, setSuccess, success }) => {
         </>
       ) : (
         <>
-          {' '}
           <h3>{message}</h3>
           <StandardButton onClick={handleOnclickNavigation}>Ok</StandardButton>
         </>
