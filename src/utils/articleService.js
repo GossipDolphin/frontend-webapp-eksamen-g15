@@ -1,8 +1,9 @@
-import http from "./http.js";
+import http from './http.js';
 
-const API_CREATECATEGOTY_URL = "/article/category";
-const API_GET_CATEGORIES_URL = "/article/categories";
-const API_CREATE_ARTICLE_URL = "/article/create";
+const API_CREATECATEGOTY_URL = '/article/category';
+const API_GET_CATEGORIES_URL = '/article/categories';
+const API_CREATE_ARTICLE_URL = '/article/create';
+const API_GET_ARTICLES_URL = '/article';
 
 export const createCategory = async (data) => {
   try {
@@ -28,4 +29,12 @@ export const createArticle = async (data) => {
   }
 };
 
-export default { createCategory, getCategories, createArticle };
+export const getArticles = async () => {
+  try {
+    return await http.get(`${API_GET_ARTICLES_URL}`);
+  } catch (err) {
+    return err.response;
+  }
+};
+
+export default { createCategory, getCategories, createArticle, getArticles };

@@ -14,11 +14,11 @@ const CreateCategory = ({ isAdmin, setIsNewCategory }) => {
     e.preventDefault();
     if (isAdmin) {
       if (category !== '') {
-        const { data, err } = await createCategory({
+        const { data } = await createCategory({
           name: category,
         });
-        if (err) {
-          setMessage(err.message);
+        if (!data.success) {
+          setMessage(data.message);
         } else {
           setIsNewCategory(false);
         }

@@ -10,8 +10,8 @@ const ArticleCard = ({ article, setDetailedArticle }) => {
     <ArticleCardWrapperGrid onClick={handleOnClick}>
       <section />
       <h2>{article.title}</h2>
-      <p>{article.category}</p>
-      <p>{article.summary}</p>
+      <p>{article.category.name}</p>
+      <p>{article.ingress}</p>
     </ArticleCardWrapperGrid>
   );
 };
