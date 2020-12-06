@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import {
   DetailedArticleSection,
   DetailedArticleButtonSection,
@@ -6,9 +7,15 @@ import {
 } from '../styles/StyledComponents';
 
 const DetailedArticle = ({ detailedArticle, setDetailedArticle }) => {
+  const [redirect, setRedirect] = useState(false);
   const handleBackClick = () => {
-    setDetailedArticle(null);
+    setRedirect(true);
   };
+  if(redirect){
+    setDetailedArticle(null);
+    const url = '/Articles';
+    return <Redirect path to={url} />;
+  }
 
   return (
     <DetailedArticleSection>

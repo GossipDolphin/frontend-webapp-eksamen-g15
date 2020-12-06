@@ -21,10 +21,8 @@ const ArticlesUiButtons = ({
   };
   return (
     <ArticleButtonsUiSection>
-      {isAdmin ? (
+      {isAdmin && (
         <StandardButton onClick={showCreateForm}>NY ARTIKKEL</StandardButton>
-      ) : (
-        <></>
       )}
       <textarea placeholder="SØK" />
       <StandardButton>SØK</StandardButton>

@@ -37,4 +37,17 @@ export const getArticles = async () => {
   }
 };
 
-export default { createCategory, getCategories, createArticle, getArticles };
+export const getArticleByid = async (id) => {
+  try {
+    return await http.get(`${API_GET_ARTICLES_URL}/${id}`);
+  } catch (err) {
+    return err.response;
+  }
+};
+export default {
+  createCategory,
+  getCategories,
+  createArticle,
+  getArticles,
+  getArticleByid,
+};

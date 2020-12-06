@@ -9,7 +9,11 @@ import ArticleCard from '../components/ArticleCard';
 import Footer from '../components/Footer';
 import DetailedArticle from '../components/DetailedArticle';
 import CreateArticleForm from '../components/CreateArticleForm';
-import { getCategories, getArticles } from '../utils/articleService';
+import {
+  getCategories,
+  getArticles,
+  getArticleByid,
+} from '../utils/articleService';
 
 const Articles = ({ match }) => {
   const [articlesList, setArticlesList] = useState([]);
@@ -54,8 +58,17 @@ const Articles = ({ match }) => {
         setCategoryList(data.data);
       }
     };
+    const redirecter = async () => {
+      if (match.params.id) {
+        const { data } = await getArticleByid(match.params.id);
+        if (data.success) {
+          setDetailedArticle(data.data);
+        }
+      }
+    };
     fetchArticles();
     fetchCategories();
+    redirecter();
   }, []);
 
   useEffect(() => {
@@ -136,6 +149,7 @@ const Articles = ({ match }) => {
                         key={index}
                         article={article}
                         setDetailedArticle={setDetailedArticle}
+                        match={match}
                       />
                     ))
                   : initCurrentArticles(articlesList).map((article, index) => (
@@ -143,6 +157,7 @@ const Articles = ({ match }) => {
                         key={index}
                         article={article}
                         setDetailedArticle={setDetailedArticle}
+                        match={match}
                       />
                     ))}
                 <PageNumberButtonsSection>
