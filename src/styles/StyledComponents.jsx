@@ -591,6 +591,12 @@ export const CreateArticleFormStyled = styled.form`
   }
   > button {
     margin-bottom: 10px;
+    background-color: #43b8d9;
+    color: white;
+    :hover {
+      cursor: pointer;
+      background-color: darkgray;
+    }
   }
   > :nth-child(18) {
     width: 30px;
