@@ -816,11 +816,11 @@ export const ContactFormStyled = styled.form`
   background: white;
   box-shadow: 0px 1px 8px #00000029;
   border-radius: 8px;
-  width: 50%;
+  width: 500px;
   height: 400px;
   z-index: 2;
 
-  margin: 10% auto; /* 15% from the top and centered */
+  margin: 30px auto; /* 15% from the top and centered */
   padding: 20px;
 
   > input {
