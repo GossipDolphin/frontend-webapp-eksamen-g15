@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import { ContactFormStyled } from '../styles/StyledComponents';
+
 import Banner from '../components/Banner';
 import ContactForm from '../components/ContactForm';
 
@@ -15,7 +15,7 @@ const Contact = () => {
   }
 
   return (
-    <ContactFormStyled>
+    <>
       <Banner bannerTitle="Kontakt oss" />
       {!formSent && <ContactForm setFormSent={setFormSent} setLoading={setLoading} />}
       {formSent && (
@@ -27,7 +27,7 @@ const Contact = () => {
         </div>
       )}
       {loading && <p>Sending...</p>}
-    </ContactFormStyled>
+    </>
   );
 };
 export default Contact;

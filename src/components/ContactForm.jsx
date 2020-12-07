@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router';
 import { useAuthContext } from '../context/AuthProvider';
 import { submitForm } from '../utils/contactFormService';
+import { ContactFormStyled } from '../styles/StyledComponents';
 
 const ContactForm = ({ setFormSent, setLoading }) => {
   const { user, isLoggedIn, isAdmin } = useAuthContext();
@@ -70,31 +71,33 @@ const ContactForm = ({ setFormSent, setLoading }) => {
     };
   }, [user]);
   return (
-    <>
+    <ContactFormStyled>
       <label htmlFor="name">Navn</label>
       <input
-        type="textarea"
+        type="text"
         value={name}
         onChange={handleNameChange}
         name="name"
       />
       <label htmlFor="email">Epost</label>
       <input
-        type="textarea"
+        type="text"
         value={email}
         onChange={handleEmailChange}
         name="email"
       />
       <label htmlFor="subject">Subject</label>
       <input
-        type="textarea"
+        type="text"
         value={subject}
         onChange={handlesubjectChange}
         name="subject"
       />
       <label htmlFor="message">Message</label>
-      <input
-        type="textbox"
+      <textarea
+      type="text"
+        rows="4"
+        cols="50"
         onChange={handleMessageChange}
         value={message}
         name="message"
@@ -103,7 +106,7 @@ const ContactForm = ({ setFormSent, setLoading }) => {
         Send
       </button>
       <p style={{ color: 'red' }}>{feedback}</p>
-    </>
+    </ContactFormStyled>
   );
 };
 export default ContactForm;
