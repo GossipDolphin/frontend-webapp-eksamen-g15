@@ -47,7 +47,6 @@ const Articles = ({ match }) => {
   };
 
   useEffect(() => {
-    setDetailedArticle(null);
     const fetchArticles = async () => {
       const { data } = await getArticles();
       if (!data.success) {
@@ -77,6 +76,12 @@ const Articles = ({ match }) => {
     fetchArticles();
     fetchCategories();
   }, [match.params.id, showArticleForm]);
+
+  useEffect(() => {
+    setDetailedArticle(null);
+    setArticleToEdit(undefined);
+    setShowArticleForm(false);
+  }, [match.params.id]);
 
   useEffect(() => {
     const setColorOnSelectedPageNumber = () => {

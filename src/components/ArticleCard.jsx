@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { ArticleCardWrapperGrid } from '../styles/StyledComponents';
 import { getArticleByid } from '../utils/articleService';
 
 const ArticleCard = ({ article, setDetailedArticle }) => {
   const [redirect, setRedirect] = useState(false);
+
+  ArticleCard.propTypes = {
+    article: PropTypes.object,
+    setDetailedArticle: PropTypes.func,
+  };
+
   const handleOnClick = () => {
     setRedirect(true);
   };
@@ -25,7 +32,7 @@ const ArticleCard = ({ article, setDetailedArticle }) => {
     <ArticleCardWrapperGrid onClick={handleOnClick}>
       {article.image !== undefined ? (
         <>
-          <img src={article.image.file_path} />
+          <img src={article.image.file_path} alt="ilutrasjon av artikkel" />
           <h2>{article.title}</h2>
           <p>{article.category.name}</p>
           <p>{article.ingress}</p>

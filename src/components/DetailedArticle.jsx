@@ -5,9 +5,16 @@ import {
   DetailedArticleButtonSection,
   StandardButton,
 } from '../styles/StyledComponents';
+import { useAuthContext } from '../context/AuthProvider';
 
-const DetailedArticle = ({ detailedArticle, setDetailedArticle, setShowArticleForm, setArticleToEdit }) => {
+const DetailedArticle = ({
+  detailedArticle,
+  setDetailedArticle,
+  setShowArticleForm,
+  setArticleToEdit,
+}) => {
   const [redirect, setRedirect] = useState(false);
+  const { isAdmin } = useAuthContext();
   const handleBackClick = () => {
     setRedirect(true);
   };
@@ -31,16 +38,18 @@ const DetailedArticle = ({ detailedArticle, setDetailedArticle, setShowArticleFo
         <p>Av {detailedArticle.author}</p>
         <p>{new Date(detailedArticle.createdAt).toLocaleDateString('NO-no')}</p>
       </section>
-      <p>{detailedArticle.summary}</p>
+      <p>{detailedArticle.ingress}</p>
       <h2>{detailedArticle.subtitleOne}</h2>
       <p>{detailedArticle.contentOne}</p>
       <h2>{detailedArticle.subtitleTwo}</h2>
       <p>{detailedArticle.contentTwo}</p>
       <p>{detailedArticle.category.name}</p>
-      <DetailedArticleButtonSection>
-        <StandardButton>SLETT</StandardButton>
-        <StandardButton onClick={handleClick}>REDIGER</StandardButton>
-      </DetailedArticleButtonSection>
+      {isAdmin && (
+        <DetailedArticleButtonSection>
+          <StandardButton>SLETT</StandardButton>
+          <StandardButton onClick={handleClick}>REDIGER</StandardButton>
+        </DetailedArticleButtonSection>
+      )}
     </DetailedArticleSection>
   );
 };

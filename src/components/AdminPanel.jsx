@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { listForms, deleteForm } from '../utils/contactFormService';
 import {
-  AdminTable,
   ContactCard,
   ContactCardWrapper,
   StandardButton,
 } from '../styles/StyledComponents';
 
-const AdminPanel = (props) => {
+const AdminPanel = () => {
   const [contactForms, setContactForms] = useState(null);
 
   // method for getting forms

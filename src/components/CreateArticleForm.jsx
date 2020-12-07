@@ -5,6 +5,7 @@ import {
   CategoryOptionSection,
   StandardButton,
   ArticleCreatedPrompt,
+  BackButton,
 } from '../styles/StyledComponents';
 import CreateCategory from './CreateCategory';
 import { useAuthContext } from '../context/AuthProvider';
@@ -14,6 +15,7 @@ import {
   updateArticle,
 } from '../utils/articleService';
 import Banner from './Banner';
+import DetailedArticle from './DetailedArticle';
 
 const CreateArticleForm = ({
   categoryList,
@@ -76,6 +78,10 @@ const CreateArticleForm = ({
   const goToArtikles = () => {
     setShowArticleForm(false);
     setArticleToEdit(undefined);
+  };
+
+  const goBack = () => {
+    setShowArticleForm(false);
   };
 
   useEffect(() => {
@@ -177,83 +183,86 @@ const CreateArticleForm = ({
       )}
 
       {!success ? (
-        <CreateArticleFormStyled onSubmit={handleArticleSubmit}>
-          <label htmlFor="Tittel">Tittel</label>
-          <input
-            value={title}
-            onChange={handleTitleChange}
-            type="textarea"
-            required
-          />
-          <label htmlFor="Ingress">Ingress</label>
-          <input
-            maxLength="70"
-            value={summary}
-            onChange={handleSummaryChange}
-            type="textarea"
-            required
-          />
-          <label htmlFor="Under Tittel 1">Under Tittel 1</label>
-          <input
-            value={subTitleOne}
-            onChange={handlesubTitleOneChange}
-            type="textarea"
-            required
-          />
-          <label htmlFor="Innhold 1">Innhold 1</label>
-          <input
-            value={contentOne}
-            onChange={handleContentOneChange}
-            type="textarea"
-            required
-          />
-          <label htmlFor="Under tittel 2">Under Tittel 2</label>
-          <input
-            value={subTitleTwo}
-            onChange={handleSubTitleTwoChange}
-            type="textarea"
-          />
-          <label htmlFor="Innhold 2">Innhold 2</label>
-          <input
-            value={contentTwo}
-            onChange={handleContentTwoChange}
-            type="textarea"
-          />
-          <label htmlFor="Kategori">Kategori</label>
-          <CategoryOptionSection>
-            <select value={category} onChange={handleCatheroyChange}>
-              {categoryList.map((category, index) => (
-                <option key={index} value={category._id}>
-                  {category.name}
+        <>
+          <BackButton onClick={goBack}>Tilbake</BackButton>
+          <CreateArticleFormStyled onSubmit={handleArticleSubmit}>
+            <label htmlFor="Tittel">Tittel</label>
+            <input
+              value={title}
+              onChange={handleTitleChange}
+              type="textarea"
+              required
+            />
+            <label htmlFor="Ingress">Ingress</label>
+            <input
+              maxLength="700"
+              value={summary}
+              onChange={handleSummaryChange}
+              type="textarea"
+              required
+            />
+            <label htmlFor="Under Tittel 1">Under Tittel 1</label>
+            <input
+              value={subTitleOne}
+              onChange={handlesubTitleOneChange}
+              type="textarea"
+              required
+            />
+            <label htmlFor="Innhold 1">Innhold 1</label>
+            <input
+              value={contentOne}
+              onChange={handleContentOneChange}
+              type="textarea"
+              required
+            />
+            <label htmlFor="Under tittel 2">Under Tittel 2</label>
+            <input
+              value={subTitleTwo}
+              onChange={handleSubTitleTwoChange}
+              type="textarea"
+            />
+            <label htmlFor="Innhold 2">Innhold 2</label>
+            <input
+              value={contentTwo}
+              onChange={handleContentTwoChange}
+              type="textarea"
+            />
+            <label htmlFor="Kategori">Kategori</label>
+            <CategoryOptionSection>
+              <select value={category} onChange={handleCatheroyChange}>
+                {categoryList.map((category, index) => (
+                  <option key={index} value={category._id}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+              <button type="button" onClick={handleClickNewCatgegory}>
+                NY
+              </button>
+            </CategoryOptionSection>
+            <label htmlFor="Forfatter">Forfatter</label>
+            <select value={author} onChange={handleAuthorChange}>
+              {authors.map((author, index) => (
+                <option key={index} value={author}>
+                  {author}
                 </option>
               ))}
             </select>
-            <button type="button" onClick={handleClickNewCatgegory}>
-              NY
-            </button>
-          </CategoryOptionSection>
-          <label htmlFor="Forfatter">Forfatter</label>
-          <select value={author} onChange={handleAuthorChange}>
-            {authors.map((author, index) => (
-              <option key={index} value={author}>
-                {author}
-              </option>
-            ))}
-          </select>
-          <label>Hemmelig</label>
-          <input onChange={handleSecretChange} type="checkbox" />
-          <label>Last opp bilde</label>
-          <input
-            file={image}
-            onChange={handleImageUpload}
-            type="file"
-            id="myfile"
-            name="myfile"
-            accept="image/png,image/jpeg,image/jpg"
-          />
-          <p>{message}</p>
-          <StandardButton type="submit">{submitButtonText}</StandardButton>
-        </CreateArticleFormStyled>
+            <label>Hemmelig</label>
+            <input onChange={handleSecretChange} type="checkbox" />
+            <label>Last opp bilde</label>
+            <input
+              file={image}
+              onChange={handleImageUpload}
+              type="file"
+              id="myfile"
+              name="myfile"
+              accept="image/png,image/jpeg,image/jpg"
+            />
+            <p>{message}</p>
+            <StandardButton type="submit">{submitButtonText}</StandardButton>
+          </CreateArticleFormStyled>
+        </>
       ) : (
         <ArticleCreatedPrompt>
           <h1>{message}</h1>

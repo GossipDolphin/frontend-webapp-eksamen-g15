@@ -195,12 +195,24 @@ export const BannerStyled = styled.section`
     position: absolute;
     width: 100vw;
   }
+  @media all and (max-width: 800px) {
+    height: 150px;
+    text-align: center;
+    > h1 {
+      position: relative;
+      margin: 0;
+    }
+  }
 `;
 
 export const OfficesCollectionGridStyled = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: auto;
+  @media all and (max-width: 800px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const OfficeCardStyled = styled.article`
@@ -313,6 +325,10 @@ export const OfficeListElementStyled = styled.article`
     width: 16px;
     text-align: center;
   }
+  @media all and (max-width: 600px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const WelcomeArticleStyled = styled.article`
@@ -385,7 +401,11 @@ export const ArticlesSection = styled.section`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  width: 60vw;
+  width: 800px;
+
+  @media all and (max-width: 800px) {
+    width: auto;
+  }
 `;
 
 export const ArticleButtonsUiSection = styled.section`
@@ -440,60 +460,84 @@ export const StandardButton = styled.button`
 `;
 
 export const ArticleCardWrapperGrid = styled.article`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  height: 240px;
-  margin: 0 auto;
-  padding-right: 10px;
-  padding-left: 10px;
-  :hover {
-    cursor: pointer;
-    background-color: darkgray;
-    color: black;
-    border-radius: 5px;
+  @media all and (min-width: 800px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 240px;
+    margin: 0 auto;
+    padding-right: 10px;
+    padding-left: 10px;
+    :hover {
+      cursor: pointer;
+      background-color: darkgray;
+      color: black;
+      border-radius: 5px;
+    }
+    > :nth-child(1) {
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 1;
+      grid-row-end: 4;
+      height: 180px;
+      width: 220px;
+      margin: auto 0;
+      background-color: lightgray;
+      margin-bottom: 30px;
+    }
+    > :nth-child(2) {
+      grid-column-start: 2;
+      grid-column-end: 5;
+      grid-row-start: 1;
+      grid-row-end: 2;
+      margin: auto 0;
+      margin-bottom: 0;
+      margin-left: 30px;
+      font-size: 40px;
+      font-weight: bold;
+    }
+    > :nth-child(3) {
+      grid-column-start: 5;
+      grid-column-end: 6;
+      grid-row-start: 1;
+      grid-row-end: 2;
+      margin: auto 0;
+      margin-bottom: 0;
+      font-weight: bold;
+      text-align: right;
+    }
+    > :nth-child(4) {
+      grid-column-start: 2;
+      grid-column-end: 6;
+      grid-row-start: 2;
+      grid-row-end: 4;
+      margin: auto 0;
+      margin-left: 30px;
+      font-size: 14px;
+      margin-top: 10px;
+    }
   }
-  > :nth-child(1) {
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 1;
-    grid-row-end: 4;
-    height: 180px;
-    width: 220px;
-    margin: auto 0;
+  @media all and (max-width: 800px) {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
     background-color: lightgray;
-    margin-bottom: 30px;
-  }
-  > :nth-child(2) {
-    grid-column-start: 2;
-    grid-column-end: 5;
-    grid-row-start: 1;
-    grid-row-end: 2;
-    margin: auto 0;
-    margin-bottom: 0;
-    margin-left: 30px;
-    font-size: 40px;
-    font-weight: bold;
-  }
-  > :nth-child(3) {
-    grid-column-start: 5;
-    grid-column-end: 6;
-    grid-row-start: 1;
-    grid-row-end: 2;
-    margin: auto 0;
-    margin-bottom: 0;
-    font-weight: bold;
-    text-align: right;
-  }
-  > :nth-child(4) {
-    grid-column-start: 2;
-    grid-column-end: 6;
-    grid-row-start: 2;
-    grid-row-end: 4;
-    margin: auto 0;
-    margin-left: 30px;
-    font-size: 14px;
-    margin-top: 10px;
+    padding: 10px;
+
+    :hover {
+      cursor: pointer;
+      background-color: darkgray;
+      color: black;
+      border-radius: 5px;
+    }
+    > :nth-child(3) {
+      font-style: italic;
+      margin-bottom: 5px;
+    }
+    > * {
+      width: 350px;
+      margin: 0 auto;
+    }
   }
 `;
 
@@ -574,6 +618,12 @@ export const DetailedArticleButtonSection = styled.section`
     margin-bottom: 40px;
     margin-top: 40px;
   }
+  > button {
+    :hover {
+      cursor: pointer;
+      background-color: gray;
+    }
+  }
 `;
 
 export const CreateArticleFormStyled = styled.form`
@@ -581,7 +631,7 @@ export const CreateArticleFormStyled = styled.form`
   flex-direction: column;
   width: 55vw;
   margin: 0 auto;
-  margin-top: 80px;
+  margin-top: 40px;
   > label {
     font-weight: bold;
   }
@@ -856,5 +906,19 @@ export const ConfirmSection = styled.section`
       background-color: darkgray;
       cursor: pointer;
     }
+  }
+`;
+
+export const BackButton = styled.button`
+  width: 100px;
+  height: 30px;
+  margin-left: 10px;
+  margin-top: 10px;
+  border: none;
+  color: white;
+  background-color: #43b8d9;
+  :hover {
+    background-color: gray;
+    cursor: pointer;
   }
 `;
