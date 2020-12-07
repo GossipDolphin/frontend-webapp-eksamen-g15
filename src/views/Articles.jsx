@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import {
   ArticlesSection,
   PageNumberButtonsSection,
@@ -67,9 +68,9 @@ const Articles = ({ match }) => {
         }
       }
     };
+    redirecter();
     fetchArticles();
     fetchCategories();
-    redirecter();
   }, []);
 
   useEffect(() => {
@@ -177,7 +178,14 @@ const Articles = ({ match }) => {
             </>
           ) : (
             <>
-              <Banner bannerTitle={detailedArticle.title} />
+              {detailedArticle.image !== undefined ? (
+                <Banner
+                  bannerTitle={detailedArticle.title}
+                  imageurl={detailedArticle.image.file_path}
+                />
+              ) : (
+                <Banner bannerTitle={detailedArticle.title} />
+              )}
               <DetailedArticle
                 detailedArticle={detailedArticle}
                 setDetailedArticle={setDetailedArticle}
