@@ -26,6 +26,7 @@ const Articles = ({ match }) => {
   const [categoryList, setCategoryList] = useState([]);
   const [filteredArticles, setFilteredArticles] = useState([]);
   const [showArticleForm, setShowArticleForm] = useState(false);
+  const [articleToEdit, setArticleToEdit] = useState();
   
 
   const changePage = (e) => {
@@ -125,13 +126,13 @@ const Articles = ({ match }) => {
     <>
       {showArticleForm ? (
         <>
-          <Banner bannerTitle="Ny artikkel" />
           <CreateArticleForm
             setCategoryList={setCategoryList}
             categoryList={categoryList}
             setShowArticleForm={setShowArticleForm}
+            articleToEdit={articleToEdit}
+            setDetailedArticle={setDetailedArticle}
           />
-          <Footer orgnr="007 007 007" email="lg@lgror.no" tlf="99 00 00 00" />
         </>
       ) : (
         <>
@@ -191,6 +192,8 @@ const Articles = ({ match }) => {
               <DetailedArticle
                 detailedArticle={detailedArticle}
                 setDetailedArticle={setDetailedArticle}
+                setShowArticleForm={setShowArticleForm}
+                setArticleToEdit={setArticleToEdit}
               />
             </>
           )}

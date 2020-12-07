@@ -347,6 +347,11 @@ export const DetailedOfficeSection = styled.section`
   margin: 0 auto;
   > :last-child {
     margin-bottom: 40px;
+    text-align: center;
+    > h1 {
+      margin-top: 90px;
+      position: relative;
+    }
   }
 `;
 
@@ -696,7 +701,7 @@ export const CreateCategoryFormWrapper = styled.section`
   right: 0;
   overflow: hidden;
   z-index: 2;
-  height: 150vh;
+  height: 170vh;
   background-color: rgba(0, 0, 0, 0.3);
   display: flex;
 `;
