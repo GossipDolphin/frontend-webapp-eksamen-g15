@@ -26,6 +26,7 @@ const Articles = ({ match }) => {
   const [categoryList, setCategoryList] = useState([]);
   const [filteredArticles, setFilteredArticles] = useState([]);
   const [showArticleForm, setShowArticleForm] = useState(false);
+  
 
   const changePage = (e) => {
     setCurrentPage(Number(e.target.id));
@@ -193,7 +194,6 @@ const Articles = ({ match }) => {
               />
             </>
           )}
-          <Footer orgnr="007 007 007" email="lg@lgror.no" tlf="99 00 00 00" />
         </>
       )}
     </>

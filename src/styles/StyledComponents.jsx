@@ -755,3 +755,48 @@ export const ArticleCreatedPrompt = styled.section`
     }
   }
 `;
+export const ContactFormStyled = styled.form`
+  display: flex;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 0px 1px 8px #00000029;
+  border-radius: 8px;
+  width: 50%;
+  height: 400px;
+  z-index: 2;
+
+  margin: 10% auto; /* 15% from the top and centered */
+  padding: 20px;
+
+  > * {
+    display: flex;
+    flex-direction: column;
+
+    //margin-top: 8%;
+    margin-inline: 5%;
+
+    font: normal normal bold 12px/17px Helvetica;
+    letter-spacing: 0px;
+    color: #333333;
+  }
+
+  > input {
+    border-radius: 5px;
+  }
+  > textarea {
+    height: 60%;
+    border-radius: 5px;
+    resize: none;
+  }
+
+  > button {
+    margin-top: 10%;
+    margin-inline: 10%;
+    width: 80%;
+    background: #56d4c2 0% 0% no-repeat padding-box;
+    border-style: none;
+    font: normal normal bold 16px/22px Arial, Helvetica;
+    color: white;
+  }
+`;

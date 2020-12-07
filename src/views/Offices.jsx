@@ -93,7 +93,6 @@ const Offices = () => {
           />
         </>
       )}
-      <Footer orgnr="007 007 007" email="lg@lgror.no" tlf="99 00 00 00" />
     </OfficesSection>
   );
 };
