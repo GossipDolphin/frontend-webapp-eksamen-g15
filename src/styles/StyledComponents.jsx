@@ -470,7 +470,7 @@ export const ArticleCardWrapperGrid = styled.article`
     padding-left: 10px;
     :hover {
       cursor: pointer;
-      background-color: darkgray;
+      box-shadow: 0px 1px 8px #00000029;
       color: black;
       border-radius: 5px;
     }
