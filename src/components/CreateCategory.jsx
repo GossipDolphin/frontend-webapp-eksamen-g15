@@ -4,23 +4,39 @@ import {
   CreateCategoryFormWrapper,
   StandardButton,
 } from '../styles/StyledComponents';
-import { createCategory } from '../utils/articleService';
+import { createCategory, getCategories } from '../utils/articleService';
 
-const CreateCategory = ({ isAdmin, setIsNewCategory }) => {
-  const [category, setCategory] = useState('');
+const CreateCategory = ({
+  isAdmin,
+  setIsNewCategory,
+  setCategoryList,
+  setCategory,
+}) => {
+  const [categoryInput, setCategoryInput] = useState('');
   const [message, setMessage] = useState('');
+
+  const fetchCategories = async () => {
+    const { data } = await getCategories();
+    if (!data.success) {
+      setMessage(data.message);
+    } else {
+      setCategoryList(data.data);
+    }
+  };
 
   const handleClickcreateCategory = async (e) => {
     e.preventDefault();
     if (isAdmin) {
-      if (category !== '') {
+      if (categoryInput !== '') {
         const { data } = await createCategory({
-          name: category,
+          name: categoryInput,
         });
         if (!data.success) {
           setMessage(data.message);
         } else {
           setIsNewCategory(false);
+          setCategory(data.data._id);
+          await fetchCategories();
         }
       } else {
         setMessage('Ingen kategori skrevet inn');
@@ -31,7 +47,7 @@ const CreateCategory = ({ isAdmin, setIsNewCategory }) => {
   };
 
   const handleCategoryChange = (e) => {
-    setCategory(e.target.value);
+    setCategoryInput(e.target.value);
   };
 
   return (

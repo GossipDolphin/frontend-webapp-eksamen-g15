@@ -36,17 +36,20 @@ const Articles = ({ match }) => {
     for (let i = 1; i <= Math.ceil(list.length / articlesPerPage); i++) {
       pageNumbersGenerated.push(i);
     }
+    if (list.length < 1) {
+      pageNumbersGenerated.push(1);
+    }
     return pageNumbersGenerated;
   };
 
   useEffect(() => {
+    setDetailedArticle(null);
     const fetchArticles = async () => {
       const { data } = await getArticles();
       if (!data.success) {
         console.log(data.message);
       } else {
-        console.log(data.data);
-        setArticlesList(data.data);
+        setArticlesList(data.data.reverse());
       }
     };
 
@@ -55,7 +58,6 @@ const Articles = ({ match }) => {
       if (!data.success) {
         console.log(data.message);
       } else {
-        console.log(data.data);
         setCategoryList(data.data);
       }
     };
@@ -70,7 +72,7 @@ const Articles = ({ match }) => {
     redirecter();
     fetchArticles();
     fetchCategories();
-  }, []);
+  }, [match.params.id, showArticleForm]);
 
   useEffect(() => {
     const setColorOnSelectedPageNumber = () => {
@@ -95,6 +97,7 @@ const Articles = ({ match }) => {
     articlesList,
     currentPage,
     pageNumbers,
+    showArticleForm,
   ]);
 
   useEffect(() => {
@@ -108,7 +111,7 @@ const Articles = ({ match }) => {
     } else {
       setPageNumbers(generatePageNumbers(articlesList));
     }
-  }, [filterValue, articlesList]);
+  }, [filterValue, articlesList, showArticleForm]);
 
   const initCurrentArticles = (list) => {
     const indexOfLastArticle = currentPage * articlesPerPage;
@@ -126,7 +129,6 @@ const Articles = ({ match }) => {
             setCategoryList={setCategoryList}
             categoryList={categoryList}
             setShowArticleForm={setShowArticleForm}
-            setDetailedArticle={setDetailedArticle}
           />
           <Footer orgnr="007 007 007" email="lg@lgror.no" tlf="99 00 00 00" />
         </>

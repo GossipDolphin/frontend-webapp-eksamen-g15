@@ -738,3 +738,20 @@ export const CreateCategoryForm = styled.form`
     }
   }
 `;
+
+export const ArticleCreatedPrompt = styled.section`
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  > button {
+    background-color: #43b8d9;
+    color: white;
+    :hover {
+      background-color: darkgray;
+      cursor: pointer;
+    }
+  }
+`;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { ArticleCardWrapperGrid } from '../styles/StyledComponents';
+import { getArticleByid } from '../utils/articleService';
 
 const ArticleCard = ({ article, setDetailedArticle }) => {
   const [redirect, setRedirect] = useState(false);
@@ -10,9 +11,13 @@ const ArticleCard = ({ article, setDetailedArticle }) => {
 
   if (redirect) {
     const url = `/Articles/${article.id}`;
-    setTimeout(() => {
-      setDetailedArticle(article);
-    }, 10);
+    const fetch = async () => {
+      const { data } = await getArticleByid(article.id);
+      if (data.success) {
+        setDetailedArticle(data.data);
+      }
+    };
+    fetch();
     return <Redirect path to={url} />;
   }
 
