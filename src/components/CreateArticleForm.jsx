@@ -21,6 +21,7 @@ const CreateArticleForm = ({
   setCategoryList,
   articleToEdit,
   setDetailedArticle,
+  setArticleToEdit,
 }) => {
   const { isAdmin } = useAuthContext();
   const authors = ['Petter', 'Kalle', 'Bjørnson'];
@@ -74,6 +75,7 @@ const CreateArticleForm = ({
   };
   const goToArtikles = () => {
     setShowArticleForm(false);
+    setArticleToEdit(undefined);
   };
 
   useEffect(() => {

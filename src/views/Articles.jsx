@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {
   ArticlesSection,
   PageNumberButtonsSection,
@@ -7,7 +7,6 @@ import {
 import Banner from '../components/Banner';
 import ArticlesUiButtons from '../components/ArticlesUiButtons';
 import ArticleCard from '../components/ArticleCard';
-import Footer from '../components/Footer';
 import DetailedArticle from '../components/DetailedArticle';
 import CreateArticleForm from '../components/CreateArticleForm';
 import {
@@ -27,7 +26,10 @@ const Articles = ({ match }) => {
   const [filteredArticles, setFilteredArticles] = useState([]);
   const [showArticleForm, setShowArticleForm] = useState(false);
   const [articleToEdit, setArticleToEdit] = useState();
-  
+
+  Articles.propTypes = {
+    match: PropTypes.string,
+  };
 
   const changePage = (e) => {
     setCurrentPage(Number(e.target.id));
@@ -35,7 +37,7 @@ const Articles = ({ match }) => {
 
   const generatePageNumbers = (list) => {
     const pageNumbersGenerated = [];
-    for (let i = 1; i <= Math.ceil(list.length / articlesPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(list.length / articlesPerPage); i += 1) {
       pageNumbersGenerated.push(i);
     }
     if (list.length < 1) {
@@ -132,6 +134,7 @@ const Articles = ({ match }) => {
             setShowArticleForm={setShowArticleForm}
             articleToEdit={articleToEdit}
             setDetailedArticle={setDetailedArticle}
+            setArticleToEdit={setArticleToEdit}
           />
         </>
       ) : (
