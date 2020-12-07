@@ -7,7 +7,7 @@ import ContactForm from '../components/ContactForm';
 const Contact = () => {
   const [formSent, setFormSent] = useState(false);
   const [redirect, setRedirect] = useState(false);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const returnClicked = () => setRedirect(true);
 
   if (redirect) {
@@ -17,7 +17,9 @@ const Contact = () => {
   return (
     <>
       <Banner bannerTitle="Kontakt oss" />
-      {!formSent && <ContactForm setFormSent={setFormSent} setLoading={setLoading} />}
+      {!formSent && (
+        <ContactForm setFormSent={setFormSent} setLoading={setLoading} />
+      )}
       {formSent && (
         <div>
           <h1>Form sent, you will be receiving a confirmation mail shortly</h1>

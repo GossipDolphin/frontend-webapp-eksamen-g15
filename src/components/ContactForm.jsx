@@ -33,8 +33,9 @@ const ContactForm = ({ setFormSent, setLoading }) => {
   };
 
   // submitting form, checking fields and email form
-  const submitClicked = async () => {
-    if (name !== '' && email !== '' && subject !== '' && message !== '') {
+  const submitClicked = async (e) => {
+    e.preventDefault();
+
       if (!email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
         setFeedback('Email has to be real');
       } else {
@@ -55,10 +56,9 @@ const ContactForm = ({ setFormSent, setLoading }) => {
           setLoading(false);
         }
       }
-    } else {
-      setFeedback('Fill in all fields');
     }
-  };
+
+
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -71,13 +71,14 @@ const ContactForm = ({ setFormSent, setLoading }) => {
     };
   }, [user]);
   return (
-    <ContactFormStyled>
+    <ContactFormStyled onSubmit={submitClicked}>
       <label htmlFor="name">Navn</label>
       <input
         type="text"
         value={name}
         onChange={handleNameChange}
         name="name"
+        required
       />
       <label htmlFor="email">Epost</label>
       <input
@@ -85,6 +86,7 @@ const ContactForm = ({ setFormSent, setLoading }) => {
         value={email}
         onChange={handleEmailChange}
         name="email"
+        required
       />
       <label htmlFor="subject">Subject</label>
       <input
@@ -92,17 +94,19 @@ const ContactForm = ({ setFormSent, setLoading }) => {
         value={subject}
         onChange={handlesubjectChange}
         name="subject"
+        required
       />
       <label htmlFor="message">Message</label>
       <textarea
-      type="text"
+        type="text"
         rows="4"
         cols="50"
         onChange={handleMessageChange}
         value={message}
         name="message"
+        required
       />
-      <button type="button" onClick={submitClicked}>
+      <button type="submit">
         Send
       </button>
       <p style={{ color: 'red' }}>{feedback}</p>

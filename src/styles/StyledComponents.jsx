@@ -741,7 +741,6 @@ export const CreateCategoryForm = styled.form`
 
 export const ContactFormStyled = styled.form`
   display: flex;
-  display: flex;
   flex-direction: column;
   background: #ffffff 0% 0% no-repeat padding-box;
   box-shadow: 0px 1px 8px #00000029;
@@ -782,5 +781,58 @@ export const ContactFormStyled = styled.form`
     border-style: none;
     font: normal normal bold 16px/22px Arial, Helvetica;
     color: white;
+  }
+`;
+
+export const ContactCard = styled.article`
+  width: 50%;
+  margin: auto;
+  box-shadow: 0px 8px 8px #5e5353;
+  margin-block: 10px;
+  display: flex;
+    flex-direction: row;
+    size: 33%;
+
+  
+
+  > * {
+    margin-block: 5px;
+  }
+
+  > h4 {
+    /*setting row for element, start and end of columns*/
+
+    //text-align: left;
+    font: normal normal bold 16px/22px Arial, Helvetica;
+    letter-spacing: 0px;
+    color: #333333;
+
+    margin-inline: 20px;
+  }
+
+  > p {
+    text-align: left;
+    font: normal normal normal 14px/19px Arial, Helvetica;
+    letter-spacing: 0px;
+    color: #333333;
+
+    margin-inline: 20px;
+  }
+
+  > button {
+    padding: 5px;
+    margin-inline: 5px;
+    border-radius: 5px;
+    color: #ffffff;
+    width: 80px;
+    height: 30px;
+    background-color: red;
+
+    border-style: none;
+  }
+
+  >h1 {
+    
+    
   }
 `;

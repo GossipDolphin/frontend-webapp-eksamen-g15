@@ -5,7 +5,7 @@ import { NavBarStyled } from '../styles/StyledComponents';
 import { logout } from '../utils/userService.js';
 
 const NavBar = () => {
-  const { isLoggedIn, setUser } = useAuthContext();
+  const { isLoggedIn, setUser, isAdmin } = useAuthContext();
   const handleLogout = async () => {
     await logout();
     setUser(null);
@@ -43,6 +43,13 @@ const NavBar = () => {
             Kontorer
           </NavLink>
         </li>
+        {isAdmin && (
+          <li>
+            <NavLink activeClassName="active" to="/Admin">
+              Admin
+            </NavLink>
+          </li>
+        )}
         <li>
           <NavLink activeClassName="active" to="/Home">
             Hjem
