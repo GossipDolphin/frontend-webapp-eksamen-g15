@@ -5,6 +5,7 @@ const API_GET_CATEGORIES_URL = '/article/categories';
 const API_CREATE_ARTICLE_URL = '/article/create';
 const API_GET_ARTICLES_URL = '/article';
 const API_CREATE_IMAGE_URL = '/image/upload';
+const API_UPDATE_ARTICLE_URL = `/article`
 
 export const createCategory = async (data) => {
   try {
@@ -41,6 +42,14 @@ export const getArticles = async () => {
 export const getArticleByid = async (id) => {
   try {
     return await http.get(`${API_GET_ARTICLES_URL}/${id}`);
+  } catch (err) {
+    return err.response;
+  }
+};
+
+export const updateArticle = async (data) => {
+  try {
+    return await http.put(`${API_UPDATE_ARTICLE_URL}/${data._id}`, data);
   } catch (err) {
     return err.response;
   }

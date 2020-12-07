@@ -6,7 +6,7 @@ import {
   StandardButton,
 } from '../styles/StyledComponents';
 
-const DetailedArticle = ({ detailedArticle, setDetailedArticle }) => {
+const DetailedArticle = ({ detailedArticle, setDetailedArticle, setShowArticleForm, setArticleToEdit }) => {
   const [redirect, setRedirect] = useState(false);
   const handleBackClick = () => {
     setRedirect(true);
@@ -18,6 +18,11 @@ const DetailedArticle = ({ detailedArticle, setDetailedArticle }) => {
     const url = '/Articles';
     return <Redirect path to={url} />;
   }
+
+  const handleClick = () => {
+    setArticleToEdit(detailedArticle);
+    setShowArticleForm(true);
+  };
 
   return (
     <DetailedArticleSection>
@@ -34,7 +39,7 @@ const DetailedArticle = ({ detailedArticle, setDetailedArticle }) => {
       <p>{detailedArticle.category.name}</p>
       <DetailedArticleButtonSection>
         <StandardButton>SLETT</StandardButton>
-        <StandardButton>REDIGER</StandardButton>
+        <StandardButton onClick={handleClick}>REDIGER</StandardButton>
       </DetailedArticleButtonSection>
     </DetailedArticleSection>
   );

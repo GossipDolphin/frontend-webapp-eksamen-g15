@@ -347,6 +347,11 @@ export const DetailedOfficeSection = styled.section`
   margin: 0 auto;
   > :last-child {
     margin-bottom: 40px;
+    text-align: center;
+    > h1 {
+      margin-top: 90px;
+      position: relative;
+    }
   }
 `;
 
@@ -696,7 +701,7 @@ export const CreateCategoryFormWrapper = styled.section`
   right: 0;
   overflow: hidden;
   z-index: 2;
-  height: 150vh;
+  height: 170vh;
   background-color: rgba(0, 0, 0, 0.3);
   display: flex;
 `;
@@ -739,6 +744,22 @@ export const CreateCategoryForm = styled.form`
   }
 `;
 
+export const ArticleCreatedPrompt = styled.section`
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  > button {
+    background-color: #43b8d9;
+    color: white;
+    :hover {
+      background-color: darkgray;
+      cursor: pointer;
+    }
+  }
+`;
 export const ContactFormStyled = styled.form`
   display: flex;
   flex-direction: column;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {
   ArticlesSection,
   PageNumberButtonsSection,
@@ -7,7 +7,6 @@ import {
 import Banner from '../components/Banner';
 import ArticlesUiButtons from '../components/ArticlesUiButtons';
 import ArticleCard from '../components/ArticleCard';
-import Footer from '../components/Footer';
 import DetailedArticle from '../components/DetailedArticle';
 import CreateArticleForm from '../components/CreateArticleForm';
 import {
@@ -26,7 +25,11 @@ const Articles = ({ match }) => {
   const [categoryList, setCategoryList] = useState([]);
   const [filteredArticles, setFilteredArticles] = useState([]);
   const [showArticleForm, setShowArticleForm] = useState(false);
-  
+  const [articleToEdit, setArticleToEdit] = useState();
+
+  Articles.propTypes = {
+    match: PropTypes.string,
+  };
 
   const changePage = (e) => {
     setCurrentPage(Number(e.target.id));
@@ -34,20 +37,23 @@ const Articles = ({ match }) => {
 
   const generatePageNumbers = (list) => {
     const pageNumbersGenerated = [];
-    for (let i = 1; i <= Math.ceil(list.length / articlesPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(list.length / articlesPerPage); i += 1) {
       pageNumbersGenerated.push(i);
+    }
+    if (list.length < 1) {
+      pageNumbersGenerated.push(1);
     }
     return pageNumbersGenerated;
   };
 
   useEffect(() => {
+    setDetailedArticle(null);
     const fetchArticles = async () => {
       const { data } = await getArticles();
       if (!data.success) {
         console.log(data.message);
       } else {
-        console.log(data.data);
-        setArticlesList(data.data);
+        setArticlesList(data.data.reverse());
       }
     };
 
@@ -56,7 +62,6 @@ const Articles = ({ match }) => {
       if (!data.success) {
         console.log(data.message);
       } else {
-        console.log(data.data);
         setCategoryList(data.data);
       }
     };
@@ -71,7 +76,7 @@ const Articles = ({ match }) => {
     redirecter();
     fetchArticles();
     fetchCategories();
-  }, []);
+  }, [match.params.id, showArticleForm]);
 
   useEffect(() => {
     const setColorOnSelectedPageNumber = () => {
@@ -96,6 +101,7 @@ const Articles = ({ match }) => {
     articlesList,
     currentPage,
     pageNumbers,
+    showArticleForm,
   ]);
 
   useEffect(() => {
@@ -109,7 +115,7 @@ const Articles = ({ match }) => {
     } else {
       setPageNumbers(generatePageNumbers(articlesList));
     }
-  }, [filterValue, articlesList]);
+  }, [filterValue, articlesList, showArticleForm]);
 
   const initCurrentArticles = (list) => {
     const indexOfLastArticle = currentPage * articlesPerPage;
@@ -122,14 +128,14 @@ const Articles = ({ match }) => {
     <>
       {showArticleForm ? (
         <>
-          <Banner bannerTitle="Ny artikkel" />
           <CreateArticleForm
             setCategoryList={setCategoryList}
             categoryList={categoryList}
             setShowArticleForm={setShowArticleForm}
+            articleToEdit={articleToEdit}
             setDetailedArticle={setDetailedArticle}
+            setArticleToEdit={setArticleToEdit}
           />
-          <Footer orgnr="007 007 007" email="lg@lgror.no" tlf="99 00 00 00" />
         </>
       ) : (
         <>
@@ -189,6 +195,8 @@ const Articles = ({ match }) => {
               <DetailedArticle
                 detailedArticle={detailedArticle}
                 setDetailedArticle={setDetailedArticle}
+                setShowArticleForm={setShowArticleForm}
+                setArticleToEdit={setArticleToEdit}
               />
             </>
           )}
