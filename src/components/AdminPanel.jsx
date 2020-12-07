@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { listForms, deleteForm } from '../utils/contactFormService';
-import { AdminTable, ContactCard } from '../styles/StyledComponents';
+import {
+  AdminTable,
+  ContactCard,
+  ContactCardWrapper,
+  StandardButton,
+} from '../styles/StyledComponents';
 
 const AdminPanel = (props) => {
   const [contactForms, setContactForms] = useState(null);
@@ -31,21 +36,33 @@ const AdminPanel = (props) => {
   }, []);
 
   return (
-    <ContactCard>
+    <ContactCardWrapper>
       {contactForms &&
         contactForms.map((form) => (
-          <>
-            <h4>Name: {form.name}</h4>
-            <h4>Email: {form.email}</h4>
-            <h4>Subject: {form.subject}</h4>
-            <p><b>Message:</b> {form.message}</p>
-            <button type="button" value={form._id} onClick={removeForm}>
+          <ContactCard>
+            <h4>
+              Name:
+              <br /> {form.name}
+            </h4>
+            <h4>
+              Email:
+              <a href={`mailto: ${form.email}`}> {form.email}</a>
+            </h4>
+            <h4>
+              Subject:
+              <p>{form.subject}</p>
+            </h4>
+            <h4>
+              Message:
+              <p> {form.message}</p>
+            </h4>
+            <StandardButton type="button" value={form._id} onClick={removeForm}>
               Delete
-            </button>
-          </>
+            </StandardButton>
+          </ContactCard>
         ))}
       {!contactForms && <h1 style={{ margin: ' 0 auto' }}>No contact forms</h1>}
-    </ContactCard>
+    </ContactCardWrapper>
   );
 };
 

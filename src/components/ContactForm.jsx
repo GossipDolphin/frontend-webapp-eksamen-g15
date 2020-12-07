@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router';
 import { useAuthContext } from '../context/AuthProvider';
 import { submitForm } from '../utils/contactFormService';
-import { ContactFormStyled } from '../styles/StyledComponents';
+import { ContactFormStyled, StandardButton } from '../styles/StyledComponents';
 
-const ContactForm = ({ setFormSent, setLoading }) => {
+const ContactForm = ({ setFormSent, setLoading, loading }) => {
   const { user, isLoggedIn, isAdmin } = useAuthContext();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -36,29 +36,27 @@ const ContactForm = ({ setFormSent, setLoading }) => {
   const submitClicked = async (e) => {
     e.preventDefault();
 
-      if (!email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
-        setFeedback('Email has to be real');
+    if (!email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
+      setFeedback('Email has to be real');
+    } else {
+      // posting form
+      setLoading(true);
+      const { data } = await submitForm({
+        name,
+        email,
+        subject,
+        message,
+      });
+      // if not posted, settign feedpack
+      if (data.success) {
+        setLoading(false);
+        setFormSent(true);
       } else {
-        // posting form
-        setLoading(true);
-        const { data } = await submitForm({
-          name,
-          email,
-          subject,
-          message,
-        });
-        // if not posted, settign feedpack
-        if (data.success) {
-          setLoading(false);
-          setFormSent(true);
-        } else {
-          setFeedback(data.message);
-          setLoading(false);
-        }
+        setFeedback(data.message);
+        setLoading(false);
       }
     }
-
-
+  };
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -106,10 +104,9 @@ const ContactForm = ({ setFormSent, setLoading }) => {
         name="message"
         required
       />
-      <button type="submit">
-        Send
-      </button>
+      <StandardButton type="submit">Send</StandardButton>
       <p style={{ color: 'red' }}>{feedback}</p>
+      {loading && <p>Sending...</p>}
     </ContactFormStyled>
   );
 };

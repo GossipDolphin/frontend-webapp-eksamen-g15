@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 
 import Banner from '../components/Banner';
 import ContactForm from '../components/ContactForm';
+import { StandardButton, ConfirmSection } from '../styles/StyledComponents';
 
 const Contact = () => {
   const [formSent, setFormSent] = useState(false);
@@ -18,17 +19,20 @@ const Contact = () => {
     <>
       <Banner bannerTitle="Kontakt oss" />
       {!formSent && (
-        <ContactForm setFormSent={setFormSent} setLoading={setLoading} />
+        <ContactForm
+          setFormSent={setFormSent}
+          setLoading={setLoading}
+          loading={loading}
+        />
       )}
       {formSent && (
-        <div>
+        <ConfirmSection>
           <h1>Form sent, you will be receiving a confirmation mail shortly</h1>
-          <button type="button" onClick={returnClicked}>
+          <StandardButton type="button" onClick={returnClicked}>
             Return to home
-          </button>
-        </div>
+          </StandardButton>
+        </ConfirmSection>
       )}
-      {loading && <p>Sending...</p>}
     </>
   );
 };
