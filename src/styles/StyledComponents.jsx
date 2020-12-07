@@ -730,3 +730,12 @@ export const CreateCategoryForm = styled.form`
     }
   }
 `;
+
+export const ContactFormStyled = styled.form`
+  display: flex;
+  display: flex;
+  flex-direction: column;
+  background-color: lightgray;
+  padding: 20px;
+  margin-top: 80px;
+`;
