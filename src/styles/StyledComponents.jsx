@@ -922,3 +922,49 @@ export const BackButton = styled.button`
     cursor: pointer;
   }
 `;
+
+export const SuperAdminPanelWrapperGrid = styled.section`
+  display: grid;
+  grid-template-columns: 33% 33%;
+  grid-template-rows: auto;
+  > * {
+    margin: 10px;
+    height: 700px;
+    overflow: auto;
+  }
+`;
+
+export const TopTenArticles = styled.section`
+  grid-column-start: 0;
+  grid-column-end: 1;
+`;
+
+export const AllArticles = styled.section`
+  grid-column-start: 1;
+  grid-column-end: 2;
+`;
+
+export const AllUsersBehavior = styled.section`
+  grid-column-start: 2;
+  grid-column-end: 3;
+`;
+
+export const ArticleCardAdmin = styled.section`
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  padding: 5px;
+  border: dotted 2px gray;
+  > * {
+    margin: 0;
+  }
+`;
+
+export const TopTenArticleCard = styled.article`
+  margin-top: 10px;
+  padding: 5px;
+  border: dotted 2px gray;
+  > * {
+    margin: 0;
+  }
+`;

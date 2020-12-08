@@ -11,6 +11,7 @@ const CreateCategory = ({
   setIsNewCategory,
   setCategoryList,
   setCategory,
+  isSuperAdmin,
 }) => {
   const [categoryInput, setCategoryInput] = useState('');
   const [message, setMessage] = useState('');
@@ -26,7 +27,7 @@ const CreateCategory = ({
 
   const handleClickcreateCategory = async (e) => {
     e.preventDefault();
-    if (isAdmin) {
+    if (isAdmin || isSuperAdmin) {
       if (categoryInput !== '') {
         const { data } = await createCategory({
           name: categoryInput,

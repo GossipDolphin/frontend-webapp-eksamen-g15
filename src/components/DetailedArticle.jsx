@@ -14,7 +14,7 @@ const DetailedArticle = ({
   setArticleToEdit,
 }) => {
   const [redirect, setRedirect] = useState(false);
-  const { isAdmin } = useAuthContext();
+  const { isAdmin, isSuperAdmin } = useAuthContext();
   const handleBackClick = () => {
     setRedirect(true);
   };
@@ -33,7 +33,7 @@ const DetailedArticle = ({
 
   return (
     <DetailedArticleSection>
-      <button onClick={handleBackClick}>TILBAKE</button>
+      <button type="button" onClick={handleBackClick}>TILBAKE</button>
       <section>
         <p>Av {detailedArticle.author}</p>
         <p>
@@ -49,7 +49,7 @@ const DetailedArticle = ({
       <h2>{detailedArticle.subtitleTwo}</h2>
       <p>{detailedArticle.contentTwo}</p>
       <p>{detailedArticle.category.name}</p>
-      {isAdmin && (
+      {(isAdmin || isSuperAdmin) && (
         <DetailedArticleButtonSection>
           <StandardButton>SLETT</StandardButton>
           <StandardButton onClick={handleClick}>REDIGER</StandardButton>

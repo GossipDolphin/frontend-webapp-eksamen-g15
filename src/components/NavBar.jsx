@@ -5,7 +5,7 @@ import { NavBarStyled } from '../styles/StyledComponents';
 import { logout } from '../utils/userService.js';
 
 const NavBar = () => {
-  const { isLoggedIn, setUser, isAdmin } = useAuthContext();
+  const { isLoggedIn, setUser, isAdmin, isSuperAdmin } = useAuthContext();
   const handleLogout = async () => {
     await logout();
     setUser(null);
@@ -43,10 +43,17 @@ const NavBar = () => {
             Kontorer
           </NavLink>
         </li>
-        {isAdmin && (
+        {(isAdmin || isSuperAdmin) && (
           <li>
             <NavLink activeClassName="active" to="/Admin">
-              Admin
+              Admin Panel
+            </NavLink>
+          </li>
+        )}
+        {isSuperAdmin && (
+          <li>
+            <NavLink activeClassName="active" to="/SuperAdmin">
+              Super Admin Panel
             </NavLink>
           </li>
         )}

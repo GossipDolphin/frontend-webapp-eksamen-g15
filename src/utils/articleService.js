@@ -5,7 +5,8 @@ const API_GET_CATEGORIES_URL = '/article/categories';
 const API_CREATE_ARTICLE_URL = '/article/create';
 const API_GET_ARTICLES_URL = '/article';
 const API_CREATE_IMAGE_URL = '/image/upload';
-const API_UPDATE_ARTICLE_URL = `/article`
+const API_UPDATE_ARTICLE_URL = '/article';
+const API_GET_TOP_TEN_ARTICLES_URL = '/article/top/ten';
 
 export const createCategory = async (data) => {
   try {
@@ -69,6 +70,14 @@ export const createImage = async (image) => {
   }
 };
 
+export const getTopTenArticles = async () => {
+  try {
+    return await http.get(`${API_GET_TOP_TEN_ARTICLES_URL}`);
+  } catch (err) {
+    return err.response;
+  }
+};
+
 export default {
   createCategory,
   getCategories,
@@ -76,4 +85,5 @@ export default {
   getArticles,
   getArticleByid,
   createImage,
+  getTopTenArticles,
 };

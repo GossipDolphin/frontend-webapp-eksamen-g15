@@ -11,7 +11,7 @@ const ArticlesUiButtons = ({
   categoryList,
   setShowArticleForm,
 }) => {
-  const { isAdmin } = useAuthContext();
+  const { isAdmin, isSuperAdmin } = useAuthContext();
 
   const toggleFilter = (e) => {
     setFilterValue(e.target.value);
@@ -21,7 +21,7 @@ const ArticlesUiButtons = ({
   };
   return (
     <ArticleButtonsUiSection>
-      {isAdmin && (
+      {(isAdmin || isSuperAdmin) && (
         <StandardButton onClick={showCreateForm}>NY ARTIKKEL</StandardButton>
       )}
       <textarea placeholder="SØK" />

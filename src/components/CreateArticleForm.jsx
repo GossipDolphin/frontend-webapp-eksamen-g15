@@ -25,7 +25,7 @@ const CreateArticleForm = ({
   setDetailedArticle,
   setArticleToEdit,
 }) => {
-  const { isAdmin } = useAuthContext();
+  const { isAdmin, isSuperAdmin } = useAuthContext();
   const authors = ['Petter', 'Kalle', 'Bjørnson'];
   const [title, setTitle] = useState('');
   const [summary, setSummary] = useState('');
@@ -120,7 +120,7 @@ const CreateArticleForm = ({
 
   const handleArticleSubmit = async (e) => {
     e.preventDefault();
-    if (isAdmin) {
+    if (isAdmin || isSuperAdmin) {
       if (articleToEdit === undefined) {
         const { data } = await createArticle({
           title,
@@ -179,6 +179,7 @@ const CreateArticleForm = ({
           setIsNewCategory={setIsNewCategory}
           setCategoryList={setCategoryList}
           setCategory={setCategory}
+          isSuperAdmin={isSuperAdmin}
         />
       )}
 

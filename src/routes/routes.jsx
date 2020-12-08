@@ -7,11 +7,12 @@ import Offices from '../views/Offices';
 import Login from '../views/Login';
 import NavBar from '../components/NavBar';
 import Admin from '../views/Admin';
+import SuperAdmin from '../views/SuperAdmin';
 import { useAuthContext } from '../context/AuthProvider';
 
 export const Routes = () => {
   // if the user is admin, show route to admin panel
-  const { isAdmin } = useAuthContext();
+  const { isAdmin, isSuperAdmin } = useAuthContext();
   return (
     <>
       <NavBar />
@@ -20,7 +21,12 @@ export const Routes = () => {
         <Route exact path="/">
           <Redirect to="/Home" />
         </Route>
-        {isAdmin && <Route exact path="/Admin" component={Admin} />}
+        {isSuperAdmin && (
+          <Route exact path="/SuperAdmin" component={SuperAdmin} />
+        )}
+        {(isAdmin || isSuperAdmin) && (
+          <Route exact path="/Admin" component={Admin} />
+        )}
         <Route exact path="/Offices" component={Offices} />
         <Route exact path="/Articles" component={Articles} />
         <Route exact path="/Contact" component={Contact} />
