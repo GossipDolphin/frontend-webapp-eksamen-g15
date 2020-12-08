@@ -425,6 +425,12 @@ export const ArticleButtonsUiSection = styled.section`
       cursor: pointer;
     }
   }
+  > label {
+    margin: auto 0;
+    margin-top: 29px;
+    font-size: 18px;
+    margin-left: auto;
+  }
   > * {
     margin-left: 10px;
   }

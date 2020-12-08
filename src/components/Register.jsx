@@ -73,7 +73,7 @@ const Register = ({ setShowRegister, setSuccess, success }) => {
   };
 
   return (
-    <RegisterAndLoginForm>
+    <RegisterAndLoginForm onSubmit={registerUser}>
       {!success ? (
         <>
           <label htmlFor="name">Navn</label>
@@ -111,8 +111,8 @@ const Register = ({ setShowRegister, setSuccess, success }) => {
             autoComplete="new-password"
             required
           />
-          <p>{message}</p>
-          <StandardButton onClick={registerUser}>Register</StandardButton>
+          <h4>{message}</h4>
+          <StandardButton type="submit">Register</StandardButton>
           <p onClick={goToLogin}>login</p>
         </>
       ) : (

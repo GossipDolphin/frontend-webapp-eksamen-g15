@@ -23,7 +23,7 @@ const CreateArticleForm = ({
   setArticleToEdit,
 }) => {
   const { isAdmin, isSuperAdmin } = useAuthContext();
-  const authors = ['Petter', 'Kalle', 'Bjørnson'];
+  const authors = ['Lars Larsen', 'Hunn Gundersen', 'Simen Simensen'];
   const [title, setTitle] = useState('');
   const [summary, setSummary] = useState('');
   const [subTitleOne, setSubTitleOne] = useState('');
@@ -192,7 +192,7 @@ const CreateArticleForm = ({
             />
             <label htmlFor="Ingress">Ingress</label>
             <input
-              maxLength="700"
+              maxLength="150"
               value={summary}
               onChange={handleSummaryChange}
               type="textarea"
