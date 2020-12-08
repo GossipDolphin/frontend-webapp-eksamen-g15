@@ -25,6 +25,7 @@ const Articles = ({ match }) => {
   const [filteredArticles, setFilteredArticles] = useState([]);
   const [showArticleForm, setShowArticleForm] = useState(false);
   const [articleToEdit, setArticleToEdit] = useState();
+  const [searchValue, setSearchValue] = useState('');
 
   const changePage = (e) => {
     setCurrentPage(Number(e.target.id));
@@ -105,9 +106,29 @@ const Articles = ({ match }) => {
   ]);
 
   useEffect(() => {
-    if (filterValue.length > 1) {
+    if (filterValue.length > 0 && searchValue.length > 0) {
       const filter = articlesList.filter(
         (article) => article.category.name === filterValue
+      );
+      setFilteredArticles(
+        filter.filter((article) => article.title.includes(searchValue))
+      );
+      setPageNumbers(
+        generatePageNumbers(
+          filter.filter((article) => article.title.includes(searchValue))
+        )
+      );
+      setCurrentPage(1);
+    } else if (filterValue.length > 0) {
+      const filter = articlesList.filter(
+        (article) => article.category.name === filterValue
+      );
+      setFilteredArticles(filter);
+      setPageNumbers(generatePageNumbers(filter));
+      setCurrentPage(1);
+    } else if (searchValue.length > 0) {
+      const filter = articlesList.filter((article) =>
+        article.title.includes(searchValue)
       );
       setFilteredArticles(filter);
       setPageNumbers(generatePageNumbers(filter));
@@ -115,7 +136,7 @@ const Articles = ({ match }) => {
     } else {
       setPageNumbers(generatePageNumbers(articlesList));
     }
-  }, [filterValue, articlesList, showArticleForm]);
+  }, [filterValue, articlesList, showArticleForm, searchValue]);
 
   const initCurrentArticles = (list) => {
     const indexOfLastArticle = currentPage * articlesPerPage;
@@ -148,26 +169,30 @@ const Articles = ({ match }) => {
                   setFilterValue={setFilterValue}
                   categoryList={categoryList}
                   setShowArticleForm={setShowArticleForm}
+                  setSearchValue={setSearchValue}
+                  searchValue={searchValue}
                 />
-                {filterValue.length > 1
-                  ? initCurrentArticles(
-                      filteredArticles
-                    ).map((article, index) => (
-                      <ArticleCard
-                        key={index}
-                        article={article}
-                        setDetailedArticle={setDetailedArticle}
-                        match={match}
-                      />
-                    ))
-                  : initCurrentArticles(articlesList).map((article, index) => (
-                      <ArticleCard
-                        key={index}
-                        article={article}
-                        setDetailedArticle={setDetailedArticle}
-                        match={match}
-                      />
-                    ))}
+                {(filterValue.length > 0 || searchValue.length > 0) &&
+                  initCurrentArticles(
+                    filteredArticles
+                  ).map((article, index) => (
+                    <ArticleCard
+                      key={index}
+                      article={article}
+                      setDetailedArticle={setDetailedArticle}
+                      match={match}
+                    />
+                  ))}
+                {filterValue.length < 1 &&
+                  searchValue.length < 1 &&
+                  initCurrentArticles(articlesList).map((article, index) => (
+                    <ArticleCard
+                      key={index}
+                      article={article}
+                      setDetailedArticle={setDetailedArticle}
+                      match={match}
+                    />
+                  ))}
                 <PageNumberButtonsSection>
                   {pageNumbers.map((number) => (
                     <button
