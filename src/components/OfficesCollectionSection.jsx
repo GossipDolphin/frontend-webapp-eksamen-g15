@@ -3,8 +3,8 @@ import {
   OfficesCollectionGridStyled,
   OfficesCollectionListStyled,
 } from '../styles/StyledComponents';
-import OfficeCard from './OfficeCard';
-import OfficeListElement from './OfficeListElement';
+import { OfficeCard } from './OfficeCard';
+import { OfficeListElement } from './OfficeListElement';
 
 export const OfficesCollectionSection = ({
   location,

@@ -3,6 +3,7 @@ import http from './http.js';
 const API_REGISTER_URL = './user/register';
 const API_LOGIN_URL = './user/login';
 const API_LOGOUT_URL = './user/logout';
+const API_GET_USERS_URL = '/user/users';
 
 export const register = async (data) => {
   try {
@@ -36,4 +37,12 @@ export const logout = async () => {
   }
 };
 
-export default { register, getUserInfo, logout };
+export const getUsers = async () => {
+  try {
+    return await http.get(`${API_GET_USERS_URL}`);
+  } catch (err) {
+    return err.response;
+  }
+};
+
+export default { register, getUserInfo, logout, getUsers, login };

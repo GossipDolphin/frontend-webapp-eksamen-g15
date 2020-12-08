@@ -929,8 +929,14 @@ export const SuperAdminPanelWrapperGrid = styled.section`
   grid-template-rows: auto;
   > * {
     margin: 10px;
-    height: 700px;
-    overflow: auto;
+  }
+  > button {
+    background-color: #43b8d9;
+    color: white;
+    :hover {
+      background-color: darkgray;
+      cursor: pointer;
+    }
   }
 `;
 
@@ -947,6 +953,17 @@ export const AllArticles = styled.section`
 export const AllUsersBehavior = styled.section`
   grid-column-start: 2;
   grid-column-end: 3;
+`;
+
+export const UserCardAdmin = styled.section`
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  padding: 5px;
+  border: dotted 2px gray;
+  > * {
+    margin: 0;
+  }
 `;
 
 export const ArticleCardAdmin = styled.section`

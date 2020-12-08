@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getTopTenArticles, getArticles } from '../utils/articleService';
+import { CSVLink } from 'react-csv';
+import { getLogData } from '../utils/logService';
 import {
   SuperAdminPanelWrapperGrid,
   TopTenArticleCard,
@@ -7,37 +8,37 @@ import {
   AllArticles,
   AllUsersBehavior,
   ArticleCardAdmin,
+  UserCardAdmin,
 } from '../styles/StyledComponents';
 
 const SuperAdminPanel = () => {
   const [message, setMessage] = useState('');
   const [topTenArticles, setTopTenArticles] = useState([]);
   const [allArticles, setAllArticles] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [CSVdata, setCSVData] = useState('');
 
   useEffect(() => {
-    const fetchTopTenArticles = async () => {
-      const { data } = await getTopTenArticles();
+    const fetchLog = async () => {
+      const { data } = await getLogData();
       if (!data.success) {
         setMessage(data.message);
       } else {
-        setTopTenArticles(data.data);
+        setCSVData(JSON.stringify(data, null, 4));
+        setAllArticles(data.data.articles);
+        setUsers(data.data.users);
+        setTopTenArticles(data.data.topTenArticles);
       }
     };
-
-    const fetchArticles = async () => {
-      const { data } = await getArticles();
-      if (!data.success) {
-        setMessage(data.message);
-      } else {
-        setAllArticles(data.data);
-      }
-    };
-    fetchArticles();
-    fetchTopTenArticles();
+    fetchLog();
   }, []);
 
   return (
     <SuperAdminPanelWrapperGrid>
+      <CSVLink data={CSVdata} target="_blank" filename="log.csv">
+        last ned som CSV
+      </CSVLink>
+      <p>{message}</p>
       <TopTenArticles>
         <h2>Top 10 Artikler</h2>
         {topTenArticles.map((article, index) => (
@@ -47,7 +48,10 @@ const SuperAdminPanel = () => {
               <br />
               ID: {article._id}
             </h4>
-            <p>Antall lesninger: {article.timesRead}</p>
+            <p>Visninger: {article.timesRead}</p>
+            <p>
+              Laget: {new Date(article.createdAt).toLocaleDateString('NO-no')}
+            </p>
             <p>
               Avg lesetid: {Math.round(article.averageReadTime * 100) / 100}{' '}
               minutter
@@ -63,13 +67,33 @@ const SuperAdminPanel = () => {
             <p>ID: {article._id}</p>
             <p>Visninger: {article.timesRead}</p>
             <p>
+              Laget: {new Date(article.createdAt).toLocaleDateString('NO-no')}
+            </p>
+            <p>
               Avg lesetid: {Math.round(article.averageReadTime * 100) / 100}{' '}
               minutter
             </p>
           </ArticleCardAdmin>
         ))}
       </AllArticles>
-      <AllUsersBehavior />
+      <AllUsersBehavior>
+        <h2>User behavior</h2>
+        {users.map((user, index) => (
+          <UserCardAdmin key={index}>
+            <p>ID: {user._id}</p>
+            <p>Role: {user.role}</p>
+            <p>Laget: {user.createdAt}</p>
+            <p>Antall artikler lest: {user.nrOfArticlesRead}</p>
+            <select>
+              {user.articlesRead.map((id, i) => (
+                <option key={i} value={id}>
+                  Artikkel ID: {id}
+                </option>
+              ))}
+            </select>
+          </UserCardAdmin>
+        ))}
+      </AllUsersBehavior>
     </SuperAdminPanelWrapperGrid>
   );
 };

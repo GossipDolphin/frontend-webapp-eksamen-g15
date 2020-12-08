@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router';
 import { useAuthContext } from '../context/AuthProvider';
 import { submitForm } from '../utils/contactFormService';
 import { ContactFormStyled, StandardButton } from '../styles/StyledComponents';
 
 const ContactForm = ({ setFormSent, setLoading, loading }) => {
-  const { user, isLoggedIn, isAdmin } = useAuthContext();
+  const { user, isLoggedIn } = useAuthContext();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');

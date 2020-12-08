@@ -32,7 +32,7 @@ const Register = ({ setShowRegister, setSuccess, success }) => {
     setPasswordRepeted(e.target.value);
   };
 
-  const goToLogin = (e) => {
+  const goToLogin = () => {
     setShowRegister(false);
   };
 

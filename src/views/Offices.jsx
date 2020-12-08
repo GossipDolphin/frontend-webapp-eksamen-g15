@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { OfficesSection } from '../styles/StyledComponents';
 import Banner from '../components/Banner';
-import OfficesCollectionSection from '../components/OfficesCollectionSection';
+import { OfficesCollectionSection } from '../components/OfficesCollectionSection';
 import OfficesUiButtons from '../components/OfficesUiButtons';
 import DetailedOffice from '../components/DetailedOffice';
-import Footer from '../components/Footer';
 
 const Offices = () => {
   const [officeList, setOfficeList] = useState([]);

@@ -12,7 +12,6 @@ const AdminPanel = () => {
   // method for getting forms
   const getForms = async () => {
     const { data } = await listForms();
-    console.log(data);
     if (data.success) {
       if (data.data.length < 1) {
         setContactForms(null);
@@ -37,8 +36,8 @@ const AdminPanel = () => {
   return (
     <ContactCardWrapper>
       {contactForms &&
-        contactForms.map((form) => (
-          <ContactCard>
+        contactForms.map((form, index) => (
+          <ContactCard key={index}>
             <h4>
               Name:
               <br /> {form.name}

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
 import {
   CreateArticleFormStyled,
   CategoryOptionSection,
@@ -15,14 +14,12 @@ import {
   updateArticle,
 } from '../utils/articleService';
 import Banner from './Banner';
-import DetailedArticle from './DetailedArticle';
 
 const CreateArticleForm = ({
   categoryList,
   setShowArticleForm,
   setCategoryList,
   articleToEdit,
-  setDetailedArticle,
   setArticleToEdit,
 }) => {
   const { isAdmin, isSuperAdmin } = useAuthContext();
@@ -34,7 +31,7 @@ const CreateArticleForm = ({
   const [subTitleTwo, setSubTitleTwo] = useState('');
   const [contentTwo, setContentTwo] = useState('');
   const [category, setCategory] = useState(categoryList[0]._id);
-  const [author, setAuthor] = useState('');
+  const [author, setAuthor] = useState(authors[0]);
   const [secret, setSecret] = useState(false);
   const [isNewCategory, setIsNewCategory] = useState(false);
   const [message, setMessage] = useState('');
@@ -112,7 +109,6 @@ const CreateArticleForm = ({
   };
 
   useEffect(() => {
-    setAuthor(authors[0]);
     if (articleToEdit !== undefined) {
       setSubmitButtonText('Oppdater');
     }
@@ -231,9 +227,9 @@ const CreateArticleForm = ({
             <label htmlFor="Kategori">Kategori</label>
             <CategoryOptionSection>
               <select value={category} onChange={handleCatheroyChange}>
-                {categoryList.map((category, index) => (
-                  <option key={index} value={category._id}>
-                    {category.name}
+                {categoryList.map((categoryName, index) => (
+                  <option key={index} value={categoryName._id}>
+                    {categoryName.name}
                   </option>
                 ))}
               </select>
@@ -243,9 +239,9 @@ const CreateArticleForm = ({
             </CategoryOptionSection>
             <label htmlFor="Forfatter">Forfatter</label>
             <select value={author} onChange={handleAuthorChange}>
-              {authors.map((author, index) => (
-                <option key={index} value={author}>
-                  {author}
+              {authors.map((authorName, index) => (
+                <option key={index} value={authorName}>
+                  {authorName}
                 </option>
               ))}
             </select>

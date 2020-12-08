@@ -5,17 +5,10 @@ import { EmployeeGridSection } from '../styles/StyledComponents';
 const Employees = () => {
   const [employeeList, setEmployeeList] = useState([]);
 
-  class Employee {
-    constructor(name, position) {
-      this.name = name;
-      this.position = position;
-    }
-  }
-
   const generateEmployees = () => {
     const employees = [];
-    for (let i = 0; i < 14; i++) {
-      employees.push(new Employee(`navn${i}`, `rør ekspert${i}`));
+    for (let i = 0; i < 14; i += 1) {
+      employees.push({ name: `navn${i}`, position: `rør ekspert${i}` });
     }
     return employees;
   };
@@ -25,8 +18,8 @@ const Employees = () => {
 
   return (
     <EmployeeGridSection>
-      {employeeList.map((employee) => (
-        <EmployeeCard employee={employee} />
+      {employeeList.map((employee, index) => (
+        <EmployeeCard key={index} employee={employee} />
       ))}
     </EmployeeGridSection>
   );
