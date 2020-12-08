@@ -12,14 +12,6 @@ const Offices = () => {
   const [filterValue, setFilterValue] = useState('');
   const [detailedOffice, setDetailedOffice] = useState(null);
 
-  class Office {
-    constructor(city, nummer, tlf, epost) {
-      this.city = city;
-      this.nummer = nummer;
-      this.tlf = tlf;
-      this.epost = epost;
-    }
-  }
   const generatedOfficeList = [
     { location: 'Fredrikstad', offices: [] },
     { location: 'Sarpsborg', offices: [] },
@@ -29,21 +21,19 @@ const Offices = () => {
 
   const generateOffices = () => {
     let nummer = 0;
-    for (let i = 0; i < generatedOfficeList.length; i++) {
+    for (let i = 0; i < generatedOfficeList.length; i += 1) {
       let length = 5;
       if (i === 0 || i === 2) {
         length = 8;
       }
-      for (let j = 0; j < length; j++) {
-        generatedOfficeList[i].offices.push(
-          new Office(
-            generatedOfficeList[i].location,
-            nummer,
-            '69 99 00 00',
-            `${generatedOfficeList[i].location + nummer}@epost.no`
-          )
-        );
-        nummer++;
+      for (let j = 0; j < length; j += 1) {
+        generatedOfficeList[i].offices.push({
+          city: generatedOfficeList[i].location,
+          nummer,
+          tlf: '69 99 00 00',
+          epost: `${generatedOfficeList[i].location + nummer}@epost.no`,
+        });
+        nummer += 1;
       }
     }
     return generatedOfficeList;

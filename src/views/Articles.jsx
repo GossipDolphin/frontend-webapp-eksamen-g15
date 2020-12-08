@@ -27,10 +27,6 @@ const Articles = ({ match }) => {
   const [showArticleForm, setShowArticleForm] = useState(false);
   const [articleToEdit, setArticleToEdit] = useState();
 
-  Articles.propTypes = {
-    match: PropTypes.string,
-  };
-
   const changePage = (e) => {
     setCurrentPage(Number(e.target.id));
   };

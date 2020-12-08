@@ -36,7 +36,12 @@ const DetailedArticle = ({
       <button onClick={handleBackClick}>TILBAKE</button>
       <section>
         <p>Av {detailedArticle.author}</p>
-        <p>{new Date(detailedArticle.createdAt).toLocaleDateString('NO-no')}</p>
+        <p>
+          {new Date(detailedArticle.createdAt).toLocaleDateString('NO-no')}
+          <br />
+          Lesetid: {Math.round(detailedArticle.averageReadTime * 100) / 100}
+          minutter
+        </p>
       </section>
       <p>{detailedArticle.ingress}</p>
       <h2>{detailedArticle.subtitleOne}</h2>

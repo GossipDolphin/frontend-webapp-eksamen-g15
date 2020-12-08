@@ -34,14 +34,21 @@ const ArticleCard = ({ article, setDetailedArticle }) => {
         <>
           <img src={article.image.file_path} alt="ilutrasjon av artikkel" />
           <h2>{article.title}</h2>
-          <p>{article.category.name}</p>
+          <p>
+            {article.category.name} <br />
+            Lesetid: {Math.round(article.averageReadTime * 100) / 100} minutter
+          </p>
           <p>{article.ingress}</p>
         </>
       ) : (
         <>
           <section />
           <h2>{article.title}</h2>
-          <p>{article.category.name}</p>
+          <p>
+            {article.category.name}
+            <br />
+            Lesetid: {Math.round(article.averageReadTime * 100) / 100} minutter
+          </p>
           <p>{article.ingress}</p>
         </>
       )}
