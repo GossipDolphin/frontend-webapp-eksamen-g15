@@ -52,7 +52,7 @@ const LoginComp = ({ setShowRegister, setSuccess, success }) => {
   }
 
   return (
-    <RegisterAndLoginForm>
+    <RegisterAndLoginForm onSubmit={handleLogin}>
       {!success ? (
         <>
           <label htmlFor="emial">E-post</label>
@@ -61,6 +61,7 @@ const LoginComp = ({ setShowRegister, setSuccess, success }) => {
             type="textarea"
             placeholder="E-post"
             autoComplete="email"
+            required
           />
           <label htmlFor="password">Passord</label>
           <input
@@ -68,9 +69,10 @@ const LoginComp = ({ setShowRegister, setSuccess, success }) => {
             type="password"
             placeholder="Passord"
             autoComplete="current-password"
+            required
           />
-          <p>{message}</p>
-          <StandardButton onClick={handleLogin}>Login</StandardButton>
+          <h5>{message}</h5>
+          <StandardButton type="submit">Login</StandardButton>
           <p onClick={goToRegister}>Register</p>
         </>
       ) : (
