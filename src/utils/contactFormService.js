@@ -2,8 +2,19 @@ import http from './http.js';
 
 const API_FORM = '/contact';
 
+// getting a fresh csrf token on every post req
+export const getCsrfToken = async () => {
+  try {
+    const { data } = await http.get('/csrf-token');
+    http.defaults.headers['X-CSRF-Token'] = data.data;
+  } catch (err) {
+    return err.response;
+  }
+};
+
 export const submitForm = async (data) => {
   try {
+    await getCsrfToken();
     return await http.post(`${API_FORM}`, data);
   } catch (err) {
     return err.response;

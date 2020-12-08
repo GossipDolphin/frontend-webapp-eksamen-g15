@@ -5,8 +5,19 @@ const API_LOGIN_URL = './user/login';
 const API_LOGOUT_URL = './user/logout';
 const API_GET_USERS_URL = '/user/users';
 
+// getting a fresh csrf token on every post req
+export const getCsrfToken = async () => {
+  try {
+    const { data } = await http.get('/csrf-token');
+    http.defaults.headers['X-CSRF-Token'] = data.data;
+  } catch (err) {
+    return err.response;
+  }
+};
+
 export const register = async (data) => {
   try {
+    await getCsrfToken();
     return await http.post(`${API_REGISTER_URL}`, data);
   } catch (err) {
     return err.response;
@@ -23,6 +34,7 @@ export const getUserInfo = async () => {
 
 export const login = async (data) => {
   try {
+    await getCsrfToken();
     return await http.post(`${API_LOGIN_URL}`, data);
   } catch (err) {
     return err.response;
@@ -31,6 +43,7 @@ export const login = async (data) => {
 
 export const logout = async () => {
   try {
+    await getCsrfToken();
     return await http.post(`${API_LOGOUT_URL}`);
   } catch (err) {
     return err.response;
