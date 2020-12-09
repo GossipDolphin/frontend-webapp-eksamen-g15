@@ -103,7 +103,7 @@ const ContactForm = ({ setFormSent, setLoading, loading }) => {
         name="message"
         required
       />
-      <StandardButton type="submit">Send</StandardButton>
+      {!loading && <StandardButton type="submit">Send</StandardButton>}
       <p style={{ color: 'red' }}>{feedback}</p>
       {loading && <p>Sending...</p>}
     </ContactFormStyled>
