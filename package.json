@@ -5,6 +5,8 @@
   "main": "main.js",
   "scripts": {
     "dev": "webpack serve --config webpack.development.config.js --mode development",
+    "test": "node test/tests.js",
+    "test:watch": "nodemon test/tests.js",
     "clean": "rm -rf public"
   },
   "keywords": [],
@@ -40,7 +42,8 @@
     "webpack": "^5.3.2",
     "webpack-cli": "^4.1.0",
     "webpack-dev-server": "^3.11.0",
-    "webpack-merge": "^5.2.0"
+    "webpack-merge": "^5.2.0",
+    "nodemon": "^2.0.4"
   },
   "dependencies": {
     "@chakra-ui/core": "^0.8.0",

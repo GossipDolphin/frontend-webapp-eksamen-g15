@@ -29,7 +29,7 @@ const ArticleCard = ({ article }) => {
             {article.category.name} <br />
             Lesetid: {Math.round(article.averageReadTime * 100) / 100} minutter
           </p>
-          <p>{article.ingress}</p>
+          <p>{article.ingress.slice(0, 150)}</p>
         </>
       ) : (
         <>
@@ -40,7 +40,7 @@ const ArticleCard = ({ article }) => {
             <br />
             Lesetid: {Math.round(article.averageReadTime * 100) / 100} minutter
           </p>
-          <p>{article.ingress}</p>
+          <p>{article.ingress.slice(0, 150)}</p>
         </>
       )}
     </ArticleCardWrapperGrid>

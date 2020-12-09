@@ -192,7 +192,6 @@ const CreateArticleForm = ({
             />
             <label htmlFor="Ingress">Ingress</label>
             <input
-              maxLength="150"
               value={summary}
               onChange={handleSummaryChange}
               type="textarea"
