@@ -30,7 +30,7 @@ const CreateArticleForm = ({
   const [contentOne, setContentOne] = useState('');
   const [subTitleTwo, setSubTitleTwo] = useState('');
   const [contentTwo, setContentTwo] = useState('');
-  const [category, setCategory] = useState(categoryList[0]._id);
+  const [category, setCategory] = useState('');
   const [author, setAuthor] = useState(authors[0]);
   const [secret, setSecret] = useState(false);
   const [isNewCategory, setIsNewCategory] = useState(false);
@@ -80,6 +80,9 @@ const CreateArticleForm = ({
   };
 
   useEffect(() => {
+    if (categoryList[0] !== undefined) {
+      setCategory(categoryList[0]._id);
+    }
     if (articleToEdit !== undefined) {
       setTitle(articleToEdit.title);
       setSummary(articleToEdit.ingress);
