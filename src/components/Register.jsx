@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router';
+import { Redirect } from 'react-router-dom';
 import {
   StandardButton,
   RegisterAndLoginForm,
@@ -56,14 +56,12 @@ const Register = ({ setShowRegister, setSuccess, success }) => {
         if (data.error.code === 11000) {
           setMessage('Epost finnes allerede');
         } else {
-          console.log(data);
           setMessage(data.message);
         }
       } else {
         const user = data?.user;
         const expire = JSON.parse(window.atob(data.token.split('.')[1])).exp;
         setMessage('success registered');
-        console.log(data);
         setUser({ ...user, expire });
         setSuccess(true);
       }

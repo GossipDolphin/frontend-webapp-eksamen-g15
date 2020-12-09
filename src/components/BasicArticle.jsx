@@ -10,7 +10,12 @@ const BasicArticle = ({ title, url }) => {
     return <Redirect push to={url} />;
   }
   return (
-    <section onClick={handleOnclickNavigation}>
+    <section
+      role="button"
+      tabIndex={0}
+      onKeyPress={handleOnclickNavigation}
+      onClick={handleOnclickNavigation}
+    >
       <h1>{title}</h1>
     </section>
   );

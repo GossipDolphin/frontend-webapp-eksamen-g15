@@ -36,10 +36,8 @@ const CreateArticleForm = ({
   const [isNewCategory, setIsNewCategory] = useState(false);
   const [message, setMessage] = useState('');
   const [success, setSuccess] = useState(false);
-  const [image, setImage] = useState(null);
   const [imageId, setImageId] = useState();
   const [submitButtonText, setSubmitButtonText] = useState('LAGRE');
-  const [redirect, setRedirect] = useState(false);
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -92,7 +90,7 @@ const CreateArticleForm = ({
       setAuthor(articleToEdit.author);
       setCategory(articleToEdit.category);
     }
-  }, [articleToEdit, redirect]);
+  }, [articleToEdit]);
 
   const handleImageUpload = async (e) => {
     if (e.target.files[0] !== null) {
@@ -130,7 +128,6 @@ const CreateArticleForm = ({
         });
         if (!data.success) {
           setMessage(data.message);
-          console.log(data);
         } else {
           setSuccess(true);
           setMessage('artikkel lagret');
@@ -246,7 +243,6 @@ const CreateArticleForm = ({
             <input onChange={handleSecretChange} type="checkbox" />
             <label>Last opp bilde</label>
             <input
-              file={image}
               onChange={handleImageUpload}
               type="file"
               id="myfile"
