@@ -10,7 +10,6 @@ const API_CREATE_IMAGE_URL = '/image/upload';
 const API_UPDATE_ARTICLE_URL = '/article';
 const API_GET_TOP_TEN_ARTICLES_URL = '/article/top/ten';
 
-
 export const createCategory = async (data) => {
   try {
     if (process.env.REACT_ENV === 'production') {
