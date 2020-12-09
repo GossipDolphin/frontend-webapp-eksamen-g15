@@ -81,10 +81,17 @@ export const createImage = async (image) => {
   }
 };
 
-
 export const getTopTenArticles = async () => {
   try {
     return await http.get(`${API_GET_TOP_TEN_ARTICLES_URL}`);
+  } catch (err) {
+    return err.response;
+  }
+};
+
+export const deleteArticle = async (id) => {
+  try {
+    return await http.delete(`${API_GET_ARTICLES_URL}/${id}`);
   } catch (err) {
     return err.response;
   }
@@ -98,4 +105,5 @@ export default {
   getArticleByid,
   createImage,
   getTopTenArticles,
+  deleteArticle,
 };

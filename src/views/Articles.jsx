@@ -26,6 +26,7 @@ const Articles = ({ match }) => {
   const [showArticleForm, setShowArticleForm] = useState(false);
   const [articleToEdit, setArticleToEdit] = useState();
   const [searchValue, setSearchValue] = useState('');
+  const [deleted, setDeleted] = useState(false);
 
   const changePage = (e) => {
     setCurrentPage(Number(e.target.id));
@@ -71,7 +72,7 @@ const Articles = ({ match }) => {
     redirecter();
     fetchArticles();
     fetchCategories();
-  }, [match.params.id, showArticleForm]);
+  }, [match.params.id, showArticleForm, deleted]);
 
   useEffect(() => {
     setDetailedArticle(null);
@@ -222,6 +223,7 @@ const Articles = ({ match }) => {
                 setDetailedArticle={setDetailedArticle}
                 setShowArticleForm={setShowArticleForm}
                 setArticleToEdit={setArticleToEdit}
+                setDeleted={setDeleted}
               />
             </>
           )}

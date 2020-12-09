@@ -99,10 +99,8 @@ const CreateArticleForm = ({
       const { data } = await createImage(e.target.files[0]);
       if (!data.success) {
         setMessage(data.message);
-        console.log(data);
       } else {
         setImageId(data.data._id);
-        console.log(data.data._id);
         setMessage('Image added');
       }
     }

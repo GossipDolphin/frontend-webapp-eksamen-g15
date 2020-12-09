@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import { deleteArticle } from '../utils/articleService';
 import {
   DetailedArticleSection,
   DetailedArticleButtonSection,
@@ -12,9 +13,11 @@ const DetailedArticle = ({
   setDetailedArticle,
   setShowArticleForm,
   setArticleToEdit,
+  setDeleted,
 }) => {
   const [redirect, setRedirect] = useState(false);
   const { isAdmin, isSuperAdmin } = useAuthContext();
+  const [message, setMessage] = useState('');
   const handleBackClick = () => {
     setRedirect(true);
   };
@@ -31,9 +34,22 @@ const DetailedArticle = ({
     setShowArticleForm(true);
   };
 
+  const handleClickDelete = async () => {
+    const { data } = await deleteArticle(detailedArticle._id);
+    if (data.message) {
+      setMessage(data.message);
+    } else {
+      setRedirect(true);
+      setDetailedArticle(null);
+      setDeleted(true);
+    }
+  };
+
   return (
     <DetailedArticleSection>
-      <button type="button" onClick={handleBackClick}>TILBAKE</button>
+      <button type="button" onClick={handleBackClick}>
+        TILBAKE
+      </button>
       <section>
         <p>Av {detailedArticle.author}</p>
         <p>
@@ -51,10 +67,11 @@ const DetailedArticle = ({
       <p>{detailedArticle.category.name}</p>
       {(isAdmin || isSuperAdmin) && (
         <DetailedArticleButtonSection>
-          <StandardButton>SLETT</StandardButton>
+          <StandardButton onClick={handleClickDelete}>SLETT</StandardButton>
           <StandardButton onClick={handleClick}>REDIGER</StandardButton>
         </DetailedArticleButtonSection>
       )}
+      <p>{message}</p>
     </DetailedArticleSection>
   );
 };
