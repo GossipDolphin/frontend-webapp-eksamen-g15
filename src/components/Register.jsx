@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import {
@@ -53,11 +55,7 @@ const Register = ({ setShowRegister, setSuccess, success }) => {
         password,
       });
       if (!data.success) {
-        if (data.error.code === 11000) {
-          setMessage('Epost finnes allerede');
-        } else {
-          setMessage(data.message);
-        }
+        setMessage(data.message);
       } else {
         const user = data?.user;
         const expire = JSON.parse(window.atob(data.token.split('.')[1])).exp;
