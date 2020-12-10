@@ -112,11 +112,15 @@ const Articles = ({ match }) => {
         (article) => article.category.name === filterValue
       );
       setFilteredArticles(
-        filter.filter((article) => article.title.includes(searchValue))
+        filter.filter((article) =>
+          article.title.toLowerCase().includes(searchValue.toLowerCase())
+        )
       );
       setPageNumbers(
         generatePageNumbers(
-          filter.filter((article) => article.title.includes(searchValue))
+          filter.filter((article) =>
+            article.title.toLowerCase().includes(searchValue.toLowerCase())
+          )
         )
       );
       setCurrentPage(1);
@@ -129,7 +133,7 @@ const Articles = ({ match }) => {
       setCurrentPage(1);
     } else if (searchValue.length > 0) {
       const filter = articlesList.filter((article) =>
-        article.title.includes(searchValue)
+        article.title.toLowerCase().includes(searchValue.toLowerCase())
       );
       setFilteredArticles(filter);
       setPageNumbers(generatePageNumbers(filter));
